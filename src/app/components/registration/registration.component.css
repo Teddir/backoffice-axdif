@@ -1,0 +1,709 @@
+/* ============================================
+   MAIN CONTAINER
+   ============================================ */
+.registration-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ============================================
+   LEFT COLUMN - PROMOTIONAL SECTION
+   ============================================ */
+.left-column {
+  background: #0796E5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background-image: url('/register/Masking-1.svg');
+  background-size: cover;
+  background-position: top;
+}
+
+.promotional-content {
+  max-width: 540px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  z-index: 1;
+  position: relative;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem 0;
+  gap: 30px;
+}
+
+.promo-title {
+  font: normal normal bold 32px/40px Proxima Nova;
+  width: 340px;
+}
+
+.illustration-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.illustration-svg {
+  width: 100%;
+  max-width: 320px;
+  height: 350px;
+  object-fit: contain;
+}
+
+
+.promo-subtitle {
+  font: normal normal bold 24px/28px Proxima Nova;
+}
+
+.promo-subtitle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.promo-description {
+  text-align: center;
+  font: normal normal normal 16px/20px Proxima Nova;
+  letter-spacing: 0.62px;
+  color: #FFFFFF;
+  opacity: 0.8;
+}
+
+.pagination-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  z-index: 2;
+  position: relative;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.dot:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(1.2);
+}
+
+.dot.active {
+  background: #08539A;
+  width: 24px;
+  border-radius: 5px;
+}
+
+/* ============================================
+   RIGHT COLUMN - FORM SECTION
+   ============================================ */
+.right-column {
+  flex: 1;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 100px;
+  padding-right: 126px;
+  overflow-y: auto;
+}
+
+.form-container {
+  width: 100%;
+  padding: 6rem 0 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.success-container .logo {
+  width: 100%;
+  display: flex;
+}
+
+.success-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  max-width: 100%;
+  width: 100%;
+  padding: 6rem 0 2rem 0;
+  justify-content: space-between;
+}
+
+.success-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.logo {
+  margin-bottom: 2rem;
+}
+
+.logo-svg {
+  width: 130px;
+  max-width: 150px;
+}
+
+
+.form-title {
+  font: normal normal 800 28px/33px Proxima Nova;
+  letter-spacing: 0px;
+  color: #000037;
+  opacity: 1;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-subtitle {
+  font: normal normal 600 16px/20px Proxima Nova;
+  letter-spacing: 0px;
+  color: #000037;
+  opacity: 1;
+  margin-bottom: 40px;
+  width: 500px;
+  text-align: left;
+}
+
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-bottom: 40px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.form-column {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  text-align: left;
+  font: normal normal bold 16px/20px Proxima Nova;
+  letter-spacing: 0px;
+  color: #000037;
+  opacity: 1;
+}
+
+/* Error message styling */
+.error-message {
+  color: #EC4B5A;
+  font: normal normal normal 12px/16px Proxima Nova;
+  margin-top: -0.25rem;
+  display: block;
+}
+
+/* Error input styling */
+input.error,
+.p-password.error ::ng-deep .p-inputtext {
+  border-color: #EC4B5A !important;
+}
+
+input.error:focus,
+.p-password.error ::ng-deep .p-inputtext:focus {
+  border-color: #EC4B5A !important;
+  box-shadow: 0 0 0 0.2rem rgba(236, 75, 90, 0.2) !important;
+}
+
+.phone-input-group {
+  display: flex;
+  flex: 1;
+  gap: 0.75rem;
+}
+
+.country-code-input {
+  flex: 0 0 130px;
+  width: 100px;
+}
+
+.phone-input {
+  flex: 1;
+  width: 100px;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.checkbox-label {
+  text-align: left;
+  font: normal normal normal 14px/20px Proxima Nova;
+  letter-spacing: 0px;
+  color: #000037;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.submit-button {
+  width: 100%;
+  background: #EC4B5A;
+  border: none;
+  padding: 0.875rem;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.submit-button:hover {
+  background: #d43e4d;
+}
+
+.copyright {
+  text-align: left;
+  font: normal normal normal 16px/20px Proxima Nova;
+  letter-spacing: 0px;
+  color: #000037;
+  opacity: 1;
+}
+
+
+/* ============================================
+   SUCCESS VIEW STYLES
+   ============================================ */
+.step-icon {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-image {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+
+.step-content {
+  flex: 1;
+  padding-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.step-content .step-description {
+  width: 300px;
+}
+
+.step-title {
+  font: normal normal bold 20px/24px 'Proxima Nova';
+  color: #12204d;
+  margin: 0;
+}
+
+.step-description {
+  font: normal normal normal 16px/24px 'Proxima Nova';
+  color: #6e7da5;
+  margin: 0;
+}
+
+.success-container .login-button {
+  max-width: 700px;
+  background: #EC4B5A;
+  border: none;
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+}
+
+.success-container .login-button:hover {
+  background: #d43e4d;
+}
+
+.success-container .copyright {
+  text-align: left;
+  display: flex;
+  width: 100%;
+}
+
+.copyright-mobile {
+  display: none;
+  text-align: left;
+  font: normal normal normal 16px/20px Proxima Nova;
+  letter-spacing: 0px;
+  color: #000037;
+  opacity: 1;
+}
+
+.success-steps {
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+}
+
+.success-step {
+  display: flex;
+  align-items: center;
+  position: relative;
+  /* Necessary for the lines to anchor */
+}
+
+/* The Dashed Connector Lines - Dynamic based on data-index */
+.success-step[data-index]:not([data-index="0"])::before {
+  content: "";
+  position: absolute;
+  /* Adjust these to align with the center of your icons */
+  top: 0px;
+  left: -40px;
+
+  width: 50px;
+  height: 50px;
+
+  border-left: 3px dashed #30416d;
+  border-bottom: 3px dashed #30416d;
+  border-bottom-left-radius: 3px;
+  /* Slight curve if you like */
+}
+
+/* ============================================
+   MOBILE HEADER AND BANNER
+   ============================================ */
+.mobile-header {
+  display: none;
+}
+
+.mobile-banner {
+  display: none;
+}
+
+.mobile-logo {
+  width: 100px;
+  max-width: 120px;
+}
+
+.mobile-banner-title {
+  font: normal normal bold 30px/36px Proxima Nova;
+  letter-spacing: 0.24px;
+  color: #FFFFFF;
+  opacity: 1;
+}
+
+
+
+/* ============================================
+   MOBILE RESPONSIVE STYLES (max-width: 1024px)
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .registration-container {
+    flex-direction: column;
+    min-height: 100vh;
+    background: #0796E5;
+    background-image: url('/register/Masking-1.svg');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Show Mobile Header and Banner */
+  .mobile-header {
+    display: block;
+    background: white;
+    padding: 1rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .mobile-banner {
+    display: block;
+    background: transparent;
+    padding: 29px 18px 20px 18px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Hide Left Column on Mobile */
+  .left-column {
+    display: none;
+  }
+
+  /* Right Column - Full Width on Mobile */
+  .right-column {
+    flex: 1;
+    padding: 0;
+    width: 100%;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Form Container as White Card */
+  .form-container {
+    background: white;
+    border-radius: 20px 20px 0 0;
+    margin: 20px;
+    position: relative;
+    z-index: 10;
+    padding: 18px;
+    width: 100%;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    /* min-height: calc(100vh - 200px); */
+  }
+
+  /* Hide Logo in Form on Mobile (shown in header) */
+  .form-container .logo,
+  .success-container .logo {
+    display: none;
+  }
+
+  .form-title {
+    font: normal normal bold 20px/26px 'Proxima Nova';
+    margin-bottom: 0.75rem;
+    margin-top: 0;
+  }
+
+  .form-subtitle {
+    font: normal normal normal 14px/20px 'Proxima Nova';
+    margin-bottom: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Form field ordering is now handled in the mobile section below using display: contents */
+
+  .form-group label {
+    font-size: 14px;
+  }
+
+  .country-code-input {
+    flex: 0 0 130px;
+    width: 130px;
+  }
+
+  .phone-input {
+    flex: 1;
+    width: 100px;
+  }
+
+  .checkbox-label {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .submit-button {
+    width: 100%;
+    padding: 0.875rem;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+  }
+
+  /* Success View Mobile */
+  .success-container {
+    padding: 0;
+    min-height: auto;
+    background: white;
+    border-radius: 8px;
+  }
+
+  .step-icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .step-title {
+    font: normal normal bold 18px/22px 'Proxima Nova';
+  }
+
+  .step-description {
+    font: normal normal medium 12px/18px Poppins;
+    letter-spacing: 0px;
+    color: #6E7DA5;
+    opacity: 1;
+  }
+
+  .success-container .login-button {
+    width: 100%;
+    max-width: 100%;
+  }
+
+
+  .success-steps {
+    display: flex;
+    flex-direction: column;
+    font-family: sans-serif;
+    gap: 2.8rem;
+  }
+
+  .success-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-left: 0 !important;
+    text-align: center;
+    /* Necessary for the lines to anchor */
+  }
+
+  /* The Dashed Connector Lines - Dynamic based on data-index */
+  .success-step[data-index]:not([data-index="0"])::before {
+    content: "";
+    position: absolute;
+    /* Adjust these to align with the center of your icons */
+    top: -2rem;
+    left: 50%;
+
+    width: 30px;
+    height: 30px;
+
+    border-left: 4px dashed #30416d;
+    border-bottom: 0px dashed #30416d;
+    border-bottom-left-radius: 0px;
+    /* Slight curve if you like */
+  }
+
+
+  /* Flatten form structure on mobile - make columns disappear so form groups become direct children of form-grid */
+  .form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* Use display: contents to make form-column disappear, allowing form groups to be direct children of form-grid */
+  /* This enables CSS order to work across all form groups regardless of which column they're in */
+  .form-column {
+    display: contents;
+  }
+
+  /* Now form groups are direct children of form-grid, so order works across all of them */
+  /* Desired order: companyName, fullname, email, phoneNumber, password, confirmPassword */
+  .form-group[data-field="companyName"] {
+    order: 1;
+  }
+
+  .form-group[data-field="fullname"] {
+    order: 2;
+  }
+
+  .form-group[data-field="email"] {
+    order: 3;
+  }
+
+  .form-group[data-field="phoneNumber"] {
+    order: 4;
+  }
+
+  .form-group[data-field="password"] {
+    order: 5;
+  }
+
+  .form-group[data-field="confirmPassword"] {
+    order: 6;
+  }
+
+  .right-column {
+    padding: 0 18px;
+  }
+
+  .form-container {
+    border-radius: 16px;
+  }
+
+  .form-title {
+    font: normal normal bold 24px/28px 'Proxima Nova';
+  }
+
+  .copyright {
+    display: none;
+  }
+
+  .success-container .copyright {
+    display: none;
+  }
+
+  .registration-form {
+    padding-bottom: 0px;
+  }
+
+  .copyright-mobile {
+    display: block;
+    font: normal normal medium 14px/18px Proxima Nova;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+  }
+}
