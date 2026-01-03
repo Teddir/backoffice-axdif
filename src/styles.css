@@ -1,3 +1,152 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "tailwindcss";
+
+.p-button {
+  --p-button-border-radius: 8px; /* or any custom value */
+  min-width: 110px; 
+  --p-button-padding-y: 0.4rem;
+  --p-button-padding-x: 1.4rem;
+}
+
+.p-checkbox {
+  --p-checkbox-border-radius: 0px; /* or any custom value */
+  --p-checkbox-checked-background: #F37516;
+}
+/* Proxima Nova Font - Local font files */
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-thinit.otf') format('opentype');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-lightit.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-regularit.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-mediumit.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-semiboldit.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-boldit.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-extrabold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-extraboldit.otf') format('opentype');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-blackit.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Global font family - Proxima Nova as default */
+* {
+  font-family: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+html, body {
+  font-family: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
