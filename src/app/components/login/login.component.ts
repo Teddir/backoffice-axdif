@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -23,9 +23,9 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  showPassword = false;
+  submitted = false;
 
   constructor(
     private fb: FormBuilder,
@@ -39,26 +39,62 @@ export class LoginComponent {
     });
   }
 
-  togglePasswordVisibility() {
-    this.showPassword = !this.showPassword;
+  ngOnInit(): void {
+    // Redirect to dashboard if user is already logged in
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/dashboard/overview']);
+    }
   }
 
-  onSocialLogin(provider: string) {
+  onSubmit(): void {
+    this.submitted = true;
+    
+    // Mark all fields as touched to show validation errors
+    Object.keys(this.loginForm.controls).forEach(key => {
+      this.loginForm.get(key)?.markAsTouched();
+    });
+
+    if (this.loginForm.valid) {
+      const { email, password } = this.loginForm.value;
+      if (this.authService.login(email, password)) {
+        this.router.navigate(['/dashboard/overview']);
+      } else {
+        alert('Invalid email or password, please try again / or register your account first');
+      }
+    }
+  }
+
+  onSocialLogin(provider: string): void {
     console.log(`Login with ${provider}`);
     // In a real app, this would handle OAuth
     // For UI only, we'll just show a message
     alert(`Social login with ${provider} is not implemented (UI only)`);
   }
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      if (this.authService.login(email, password)) {
-        this.router.navigate(['/dashboard/overview']);
-      } else {
-        alert('Invalid email or password');
+  hasFieldError(fieldName: string): boolean {
+    const field = this.loginForm.get(fieldName);
+    return !!(field && field.invalid && (field.touched || this.submitted));
+  }
+
+  getFieldError(fieldName: string): string {
+    const field = this.loginForm.get(fieldName);
+    if (field && field.errors && (field.touched || this.submitted)) {
+      if (field.errors['required']) {
+        return `${this.getFieldLabel(fieldName)} is required`;
+      }
+      if (field.errors['email']) {
+        return 'Please enter a valid email address';
       }
     }
+    return '';
+  }
+
+  private getFieldLabel(fieldName: string): string {
+    const labels: { [key: string]: string } = {
+      email: 'Email',
+      password: 'Password'
+    };
+    return labels[fieldName] || fieldName;
   }
 }
 
