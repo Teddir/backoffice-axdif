@@ -54,7 +54,7 @@
 
 .section-title {
   text-align: left;
-  font: normal normal bold 20px/24px 'Open Sans';
+  font: normal normal bold 18px/24px 'Open Sans';
   letter-spacing: 0px;
   color: #212121;
   text-transform: capitalize;
@@ -74,7 +74,7 @@
 
 .period-label {
   text-align: left;
-  font: normal normal normal 14px/20px 'Open Sans';
+  font: normal normal normal 12px/20px 'Open Sans';
   letter-spacing: 0px;
   color: #212121;
   opacity: 1;
@@ -96,7 +96,7 @@
   padding: 8px 36px 8px 12px !important;
   border: 1px solid #D4D4D4 !important;
   border-radius: 6px !important;
-  font: normal normal 600 14px/20px 'Open Sans' !important;
+  font: normal normal 600 12px/20px 'Open Sans' !important;
   color: #212121 !important;
   background: white !important;
   cursor: pointer !important;
@@ -156,7 +156,7 @@
 
 .card-label {
   text-align: left;
-  font: normal normal 600 14px/20px 'Open Sans';
+  font: normal normal 600 12px/20px 'Open Sans';
   letter-spacing: 0px;
   color: #808D93;
   opacity: 1;
@@ -165,7 +165,7 @@
 
 .card-value {
   text-align: left;
-  font: normal normal bold 20px/24px 'Open Sans';
+  font: normal normal bold 18px/24px 'Open Sans';
   letter-spacing: 0px;
   color: #212121;
   opacity: 1;
@@ -198,7 +198,7 @@
 
 .task-role {
   text-align: left;
-  font: normal normal 600 14px/20px 'Open Sans';
+  font: normal normal 600 12px/20px 'Open Sans';
   letter-spacing: 0px;
   color: #808D93;
   opacity: 1;
@@ -207,7 +207,7 @@
 
 .task-title {
   text-align: left;
-  font: normal normal bold 16px/22px 'Open Sans';
+  font: normal normal bold 14px/18px 'Open Sans';
   letter-spacing: 0px;
   color: #212121;
   text-transform: capitalize;
@@ -226,7 +226,7 @@
   align-items: center;
   gap: 12px;
   text-align: left;
-  font: normal normal 600 14px/20px 'Open Sans';
+  font: normal normal 600 12px/20px 'Open Sans';
   letter-spacing: 0px;
   color: #808D93;
   opacity: 1;
@@ -257,7 +257,7 @@
   border-radius: 12px;
   white-space: nowrap;
   text-align: center;
-  font: normal normal normal 14px/20px 'Open Sans';
+  font: normal normal normal 12px/20px 'Open Sans';
   letter-spacing: 0px;
   opacity: 1;
 }
@@ -283,7 +283,7 @@
   gap: 4px;
   white-space: nowrap;
   text-align: left;
-  font: normal normal 600 14px/20px 'Open Sans';
+  font: normal normal 600 12px/20px 'Open Sans';
   letter-spacing: 0px;
   color: #808D93;
   opacity: 1;
@@ -291,7 +291,7 @@
 
 .see-all-link {
   text-align: left;
-  font: normal normal 600 14px/20px 'Open Sans';
+  font: normal normal 600 12px/20px 'Open Sans';
   letter-spacing: 0px;
   color: #0796E5;
   opacity: 1;
@@ -350,19 +350,19 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 4px solid white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  /* border: 4px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); */
   object-fit: cover;
 }
 
 .employee-info {
-  padding: 74px 1.5rem 1.5rem;
+  padding: 84px 1.5rem 1.5rem;
   text-align: center;
 }
 
 .employee-name {
   text-align: center;
-  font: normal normal bold 20px/24px 'Open Sans';
+  font: normal normal bold 18px/24px 'Open Sans';
   letter-spacing: 0px;
   color: #000000;
   text-transform: capitalize;
@@ -417,7 +417,7 @@
 
 .detail-label {
   text-align: left;
-  font: normal normal normal 14px/20px 'Open Sans';
+  font: normal normal normal 12px/20px 'Open Sans';
   letter-spacing: 0px;
   color: #808D93;
   opacity: 1;
@@ -425,7 +425,7 @@
 
 .detail-value {
   color: #000000;
-  font: normal normal normal 14px/20px 'Open Sans';
+  font: normal normal normal 12px/20px 'Open Sans';
   text-align: right;
   opacity: 1;
 }
@@ -444,7 +444,7 @@
 
 .card-title {
   text-align: left;
-  font: normal normal bold 20px/24px 'Open Sans';
+  font: normal normal bold 18px/24px 'Open Sans';
   letter-spacing: 0px;
   color: #212121;
   text-transform: capitalize;
@@ -499,7 +499,7 @@
 }
 
 .time-value {
-  font: normal normal bold 20px/24px 'Open Sans';
+  font: normal normal bold 18px/24px 'Open Sans';
   color: #000037;
 }
 
@@ -619,7 +619,7 @@
   }
 
   ::ng-deep .period-calendar-panel .p-datepicker-title {
-    font: normal normal 600 14px/20px 'Open Sans' !important;
+    font: normal normal 600 12px/20px 'Open Sans' !important;
   }
 
   ::ng-deep .period-calendar-panel .p-datepicker-prev-button,
@@ -645,7 +645,7 @@
   ::ng-deep .period-calendar-panel .p-datepicker-calendar td > span {
     width: 36px !important;
     height: 36px !important;
-    font: normal normal normal 14px/20px 'Open Sans' !important;
+    font: normal normal normal 12px/20px 'Open Sans' !important;
     border-radius: 6px !important;
   }
 

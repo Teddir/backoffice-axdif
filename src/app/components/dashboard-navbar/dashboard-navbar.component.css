@@ -48,7 +48,7 @@
 
 .nav-links {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   align-items: center;
 }
 
@@ -57,7 +57,7 @@
    ============================================================================ */
 
 .nav-link {
-  font: normal normal bold 18px/24px 'Open Sans';
+  font: normal normal bold 16px/20px 'Open Sans';
   letter-spacing: 0px;
   color: #888FB0;
   opacity: 1;
@@ -145,12 +145,12 @@
 
 .submission-dropdown {
   position: fixed;
-  top: 86px;
+  top: 81px;
   left: 0;
   right: 0;
   width: 100%;
   background: white;
-  box-shadow: 0 0px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 15px 24px #00000012;
   z-index: 999;
   padding: 24px 0;
   border-top: 1px solid #e2e8f0;
@@ -265,11 +265,12 @@
   border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
-  border: 2px solid #e2e8f0;
+  border: 2px solid transparent;
   transition: border-color 0.2s;
 }
 
-.profile-picture:hover {
+.profile-picture.active {
+  /* border: 2px solid #e2e8f0; */
   border-color: #0796E5;
 }
 
@@ -289,9 +290,10 @@
   background: white;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  min-width: 280px;
+  min-width: 386px;
   z-index: 1000;
   overflow: visible;
+  padding: 20px;
 }
 
 /* Triangle tooltip pointing to profile picture */
@@ -325,8 +327,8 @@
 .dropdown-user-info {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px;
+  gap: 20px;
+  padding-bottom: 24px;
 }
 
 .dropdown-avatar {
@@ -388,14 +390,14 @@
 .dropdown-section-label {
   font: normal normal normal 10px/14px 'Open Sans';
   color: #808D93;
-  padding: 12px 16px 0px 16px;
+  padding: 12px 0px 0px 0px;
 }
 
 .dropdown-menu-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 16px;
+  padding: 12px 0px;
   cursor: pointer;
   transition: background-color 0.2s;
   font: normal normal 600 14px/20px 'Open Sans';
@@ -483,6 +485,10 @@
    Responsive Design
    ============================================================================ */
 @media (max-width: 1024px) {
+  .profile-dropdown {
+    min-width: 320px;
+    padding: 16px;
+  }
   .submission-dropdown {
     padding: 24px 0;
   }
@@ -507,7 +513,7 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 933px) {
   .navbar {
     padding: 12px 16px;
     flex-wrap: nowrap;
@@ -578,7 +584,7 @@
   }
 
   .submission-dropdown {
-    top: 78px;
+    top: 72px;
     padding: 24px 0;
   }
 
@@ -598,5 +604,13 @@
   .submission-icon {
     width: 32px;
     height: 32px;
+  }
+}
+
+
+@media (max-width: 375px) {
+  .profile-dropdown {
+    min-width: 280px;
+    padding: 16px;
   }
 }

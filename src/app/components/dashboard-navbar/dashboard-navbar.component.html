@@ -115,7 +115,7 @@
   <!-- Right Section: Profile -->
   <div class="nav-right">
     <div class="profile-picture-wrapper">
-      <div class="profile-picture" (click)="toggleProfileDropdown()">
+      <div class="profile-picture" [class.active]="showProfileDropdown" (click)="toggleProfileDropdown()">
         <img src="/dashboard/Profile Picture.png" alt="Profile" />
       </div>
       @if (showProfileDropdown) {
