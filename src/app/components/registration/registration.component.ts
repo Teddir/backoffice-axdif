@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -89,7 +89,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
     this.registrationForm = this.fb.group({
       companyName: ['', Validators.required],
@@ -106,6 +107,11 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.startAutoPlay();
+
+    // If user is already logged in, redirect to dashboard
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/dashboard/overview']);
+    }
   }
 
   ngOnDestroy(): void {
@@ -113,9 +119,12 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   private startAutoPlay(): void {
+    this.stopAutoPlay(); // Clear any existing interval
+    
     this.autoPlayInterval = setInterval(() => {
       this.nextSlide();
-    }, 5000);
+      this.cdr.markForCheck(); // Ensure change detection runs
+    }, 5000); // 5 seconds interval for carousel slides
   }
 
   goToSlide(index: number): void {
@@ -174,7 +183,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         formValue.password
       );
       this.registrationSuccess = true;
-      this.stopAutoPlay();
     }
   }
 

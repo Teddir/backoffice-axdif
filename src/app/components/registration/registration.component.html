@@ -12,154 +12,172 @@
     <div class="promotional-content">
       <div class="carousel-container">
         <div class="carousel-slides" [style.transform]="'translateX(-' + (currentSlide * 100) + '%)'">
-          <div class="carousel-slide" *ngFor="let slide of slides">
-            <h1 class="promo-title">{{ slide.title }}</h1>
-            <div class="illustration-container">
-              <img [src]="slide.illustration" [alt]="slide.subtitle" class="illustration-svg" />
+          @for (slide of slides; track slide) {
+            <div class="carousel-slide">
+              <h1 class="promo-title">{{ slide.title }}</h1>
+              <div class="illustration-container">
+                <img [src]="slide.illustration" [alt]="slide.subtitle" class="illustration-svg" />
+              </div>
+              <div class="promo-subtitle-container">
+                <h2 class="promo-subtitle">{{ slide.subtitle }}</h2>
+                <p class="promo-description">{{ slide.description }}</p>
+              </div>
             </div>
-            <div class="promo-subtitle-container">
-              <h2 class="promo-subtitle">{{ slide.subtitle }}</h2>
-              <p class="promo-description">{{ slide.description }}</p>
-            </div>
-          </div>
+          }
         </div>
       </div>
       <div class="pagination-dots">
-        <span *ngFor="let slide of slides; let i = index" class="dot" [class.active]="i === currentSlide"
-          (click)="goToSlide(i)"></span>
+        @for (slide of slides; track slide; let i = $index) {
+          <span class="dot" [class.active]="i === currentSlide" (click)="goToSlide(i)"></span>
+        }
       </div>
     </div>
   </div>
 
   <!-- Right Column - Registration Form or Success View -->
   <div class="right-column">
-    <div class="form-container success-container" *ngIf="registrationSuccess; else registrationFormTemplate">
-      <div class="logo">
-        <img src="/logo.svg" alt="Axdif Logo" class="logo-svg" />
-      </div>
-
-      <div class="success-content">
-        <div class="success-steps">
-          <div *ngFor="let step of successSteps; let i = index" class="success-step"
-            [style.margin-left.px]="step.marginLeft" [attr.data-index]="i">
-            <div class="step-icon">
-              <img [src]="step.icon" [alt]="step.title" class="step-image" />
-            </div>
-            <div class="step-content">
-              <h3 class="step-title">{{ step.title }}</h3>
-              <p class="step-description">{{ step.description }}</p>
-            </div>
-          </div>
+    @if (registrationSuccess) {
+      <div class="form-container success-container">
+        <div class="logo">
+          <img src="/logo.svg" alt="Axdif Logo" class="logo-svg" />
         </div>
 
-        <p-button label="Login to Axdif" styleClass="login-button" (onClick)="goToLogin()"></p-button>
+        <div class="success-content">
+          <div class="success-steps">
+            @for (step of successSteps; track step; let i = $index) {
+              <div class="success-step" [style.margin-left.px]="step.marginLeft" [attr.data-index]="i">
+                <div class="step-icon">
+                  <img [src]="step.icon" [alt]="step.title" class="step-image" />
+                </div>
+                <div class="step-content">
+                  <h3 class="step-title">{{ step.title }}</h3>
+                  <p class="step-description">{{ step.description }}</p>
+                </div>
+              </div>
+            }
+          </div>
+
+          <p-button label="Login to Axdif" styleClass="login-button" (onClick)="goToLogin()"></p-button>
+        </div>
+
+        <p class="copyright">© Copyright 2023. All Right Reserved.</p>
       </div>
-
-      <p class="copyright">© Copyright 2023. All Right Reserved.</p>
-    </div>
-
-    <ng-template #registrationFormTemplate>
+    } @else {
       <div class="form-container">
         <div class="logo">
           <img src="/logo.svg" alt="Axdif Logo" class="logo-svg" />
         </div>
 
-        <h1 class="form-title">Manage all your employee efficiently</h1>
-        <p class="form-subtitle">
-          Let's get you all set up so you can verify your personal account and begin setting up your profile.
-        </p>
-
-        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="registration-form">
-          <div class="form-grid">
-            <div class="form-column">
-              <div class="form-group" data-field="companyName">
-                <label for="companyName">Company Name</label>
-                <input pInputText id="companyName" formControlName="companyName" placeholder="e.g John"
-                  class="w-full" [class.error]="hasFieldError('companyName')" />
-                <small class="error-message" *ngIf="hasFieldError('companyName')">
-                  {{ getFieldError('companyName') }}
-                </small>
-              </div>
-
-              <div class="form-group" data-field="email">
-                <label for="email">Email</label>
-                <input pInputText id="email" type="email" formControlName="email" placeholder="e.g john.doe@mail.com"
-                  class="w-full" [class.error]="hasFieldError('email')" />
-                <small class="error-message" *ngIf="hasFieldError('email')">
-                  {{ getFieldError('email') }}
-                </small>
-              </div>
-
-              <div class="form-group" data-field="password">
-                <label for="password">Password</label>
-                <p-password id="password" formControlName="password" placeholder="Insert Password" [toggleMask]="true"
-                  [feedback]="false" styleClass="w-full" inputStyleClass="w-full"
-                  [ngClass]="{'error': hasFieldError('password')}"></p-password>
-                <small class="error-message" *ngIf="hasFieldError('password')">
-                  {{ getFieldError('password') }}
-                </small>
-              </div>
-            </div>
-
-            <div class="form-column">
-              <div class="form-group" data-field="fullname">
-                <label for="fullname">Fullname</label>
-                <input pInputText id="fullname" formControlName="fullname" placeholder="e.g Doe" class="w-full"
-                  [class.error]="hasFieldError('fullname')" />
-                <small class="error-message" *ngIf="hasFieldError('fullname')">
-                  {{ getFieldError('fullname') }}
-                </small>
-              </div>
-
-              <div class="form-group" data-field="phoneNumber">
-                <label>Phone Number <span class="optional">(Optional)</span></label>
-                <div class="phone-input-group">
-                  <input pInputText formControlName="countryCode" placeholder="Country Code"
-                    class="country-code-input" />
-                  <input pInputText formControlName="phoneNumber" placeholder="e.g 821 2345 6789" class="phone-input" />
+        <div class="form-content">
+          <h1 class="form-title">Manage all your employee efficiently</h1>
+          <p class="form-subtitle">
+            Let's get you all set up so you can verify your personal account and begin setting up your profile.
+          </p>
+  
+          <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="registration-form">
+            <div class="form-grid">
+              <div class="form-column">
+                <div class="form-group" data-field="companyName">
+                  <label for="companyName">Company Name</label>
+                  <input pInputText id="companyName" formControlName="companyName" placeholder="e.g John"
+                    class="w-full" [class.error]="hasFieldError('companyName')" />
+                  @if (hasFieldError('companyName')) {
+                    <small class="error-message">
+                      {{ getFieldError('companyName') }}
+                    </small>
+                  }
+                </div>
+  
+                <div class="form-group" data-field="email">
+                  <label for="email">Email</label>
+                  <input pInputText id="email" type="email" formControlName="email" placeholder="e.g john.doe@mail.com"
+                    class="w-full" [class.error]="hasFieldError('email')" />
+                  @if (hasFieldError('email')) {
+                    <small class="error-message">
+                      {{ getFieldError('email') }}
+                    </small>
+                  }
+                </div>
+  
+                <div class="form-group" data-field="password">
+                  <label for="password">Password</label>
+                  <p-password id="password" formControlName="password" placeholder="Insert Password" [toggleMask]="true"
+                    [feedback]="false" class="w-full" inputStyleClass="w-full"
+                    [ngClass]="{'error': hasFieldError('password')}"></p-password>
+                  @if (hasFieldError('password')) {
+                    <small class="error-message">
+                      {{ getFieldError('password') }}
+                    </small>
+                  }
                 </div>
               </div>
-
-              <div class="form-group" data-field="confirmPassword">
-                <label for="confirmPassword">Confirm Password</label>
-                <p-password id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm Password"
-                  [toggleMask]="true" [feedback]="false" styleClass="w-full" inputStyleClass="w-full"
-                  [ngClass]="{'error': hasFieldError('confirmPassword')}"></p-password>
-                <small class="error-message" *ngIf="hasFieldError('confirmPassword')">
-                  {{ getFieldError('confirmPassword') }}
-                </small>
+  
+              <div class="form-column">
+                <div class="form-group" data-field="fullname">
+                  <label for="fullname">Fullname</label>
+                  <input pInputText id="fullname" formControlName="fullname" placeholder="e.g Doe" class="w-full"
+                    [class.error]="hasFieldError('fullname')" />
+                  @if (hasFieldError('fullname')) {
+                    <small class="error-message">
+                      {{ getFieldError('fullname') }}
+                    </small>
+                  }
+                </div>
+  
+                <div class="form-group" data-field="phoneNumber">
+                  <label>Phone Number <span class="optional">(Optional)</span></label>
+                  <div class="phone-input-group">
+                    <input pInputText formControlName="countryCode" placeholder="Country Code"
+                      class="country-code-input" />
+                    <input pInputText formControlName="phoneNumber" placeholder="e.g 821 2345 6789" class="phone-input" />
+                  </div>
+                </div>
+  
+                <div class="form-group" data-field="confirmPassword">
+                  <label for="confirmPassword">Confirm Password</label>
+                  <p-password id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm Password"
+                    [toggleMask]="true" [feedback]="false" class="w-full" inputStyleClass="w-full"
+                    [ngClass]="{'error': hasFieldError('confirmPassword')}"></p-password>
+                  @if (hasFieldError('confirmPassword')) {
+                    <small class="error-message">
+                      {{ getFieldError('confirmPassword') }}
+                    </small>
+                  }
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="checkbox-container">
-            <div class="checkbox-group">
-              <p-checkbox formControlName="newsletter" inputId="newsletter" [binary]="true" size="small"></p-checkbox>
-              <label for="newsletter" class="checkbox-label">
-                Yes I want to receive Axdif's Newsletter
-              </label>
+  
+            <div class="checkbox-container">
+              <div class="checkbox-group">
+                <p-checkbox formControlName="newsletter" inputId="newsletter" [binary]="true" size="small"></p-checkbox>
+                <label for="newsletter" class="checkbox-label">
+                  Yes I want to receive Axdif's Newsletter
+                </label>
+              </div>
+  
+              <div class="checkbox-group">
+                <p-checkbox formControlName="terms" inputId="terms" [binary]="true" size="small"></p-checkbox>
+                <label for="terms" class="checkbox-label">
+                  I have read and accept the
+                  <a href="#" class="link">Terms & Conditions</a>
+                  and
+                  <a href="#" class="link">Privacy Policy</a>
+                </label>
+              </div>
+              @if (hasFieldError('terms')) {
+                <small class="error-message">
+                  {{ getFieldError('terms') }}
+                </small>
+              }
             </div>
-
-            <div class="checkbox-group">
-              <p-checkbox formControlName="terms" inputId="terms" [binary]="true" size="small"></p-checkbox>
-              <label for="terms" class="checkbox-label">
-                I have read and accept the
-                <a href="#" class="link">Terms & Conditions</a>
-                and
-                <a href="#" class="link">Privacy Policy</a>
-              </label>
-            </div>
-            <small class="error-message" *ngIf="hasFieldError('terms')">
-              {{ getFieldError('terms') }}
-            </small>
-          </div>
-
-          <p-button type="submit" label="Submit" styleClass="submit-button"></p-button>
-        </form>
+  
+            <p-button type="submit" label="Submit" styleClass="submit-button"></p-button>
+          </form>
+        </div>
 
         <p class="copyright">© Copyright 2023. All Right Reserved.</p>
       </div>
-    </ng-template>
+    }
     <p class="copyright-mobile">© Copyright 2023. All Right Reserved.</p>
   </div>
 </div>

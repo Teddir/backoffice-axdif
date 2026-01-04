@@ -151,7 +151,8 @@
   padding: 6rem 0 2rem 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between;
+  min-height: 100vh; */
 }
 
 .success-container .logo {
@@ -163,12 +164,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   min-height: 100vh;
   max-width: 100%;
   width: 100%;
-  padding: 6rem 0 2rem 0;
-  justify-content: space-between;
+  padding: 6rem 0 6rem 0;
 }
 
 .success-content {
@@ -254,12 +253,6 @@
 input.error,
 .p-password.error ::ng-deep .p-inputtext {
   border-color: #EC4B5A !important;
-}
-
-input.error:focus,
-.p-password.error ::ng-deep .p-inputtext:focus {
-  border-color: #EC4B5A !important;
-  box-shadow: 0 0 0 0.2rem rgba(236, 75, 90, 0.2) !important;
 }
 
 .phone-input-group {
@@ -519,6 +512,7 @@ input.error:focus,
     width: 100%;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
     /* min-height: calc(100vh - 200px); */
+    min-height: auto;
   }
 
   /* Hide Logo in Form on Mobile (shown in header) */
@@ -611,6 +605,7 @@ input.error:focus,
     align-items: center;
     position: relative;
     margin-left: 0 !important;
+    padding-top: 12px;
     text-align: center;
     /* Necessary for the lines to anchor */
   }
