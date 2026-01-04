@@ -13,6 +13,10 @@
   --p-checkbox-border-radius: 0px; /* or any custom value */
   --p-checkbox-checked-background: #F37516;
 }
+
+.p-inputtext {
+  --p-inputtext-border-color: #888FB0;
+}
 /* Proxima Nova Font - Local font files */
 @font-face {
   font-family: 'Proxima Nova';

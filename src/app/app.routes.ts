@@ -6,7 +6,7 @@ import { DashboardEmployeeStatsComponent } from './components/dashboard-employee
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/registration', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard/overview', pathMatch: 'full' },
   { path: 'registration', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard/overview', component: DashboardOverviewComponent, canActivate: [authGuard] },
