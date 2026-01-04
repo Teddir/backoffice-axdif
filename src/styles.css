@@ -29,23 +29,7 @@
 /* Proxima Nova Font - Local font files */
 @font-face {
   font-family: 'Proxima Nova';
-  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-thin.otf') format('opentype');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Proxima Nova';
-  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-thinit.otf') format('opentype');
-  font-weight: 100;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Proxima Nova';
-  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-light.otf') format('opentype');
+  src: url('/assets/Proxima Nova/Proxima Nova Light/Proxima Nova Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -53,105 +37,66 @@
 
 @font-face {
   font-family: 'Proxima Nova';
-  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-lightit.otf') format('opentype');
+  src: url('/assets/Proxima Nova/Proxima Nova Regular/Proxima Nova Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Proxima Nova/Proxima Nova Semibold/Proxima Nova Semibold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/assets/Proxima Nova/proximanova-bold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Open Sans Font - Local font files */
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/assets/Open Sans/OpenSans-Light.ttf') format('truetype');
   font-weight: 300;
-  font-style: italic;
+  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Proxima Nova';
-  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-regular.otf') format('opentype');
+  font-family: 'Open Sans';
+  src: url('/assets/Open Sans/OpenSans-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Proxima Nova';
-  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-regularit.otf') format('opentype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Proxima Nova';
-  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-medium.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Proxima Nova';
-  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-mediumit.otf') format('opentype');
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Proxima Nova';
-  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-semibold.otf') format('opentype');
+  font-family: 'Open Sans';
+  src: url('/assets/Open Sans/OpenSans-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Proxima Nova';
-  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-semiboldit.otf') format('opentype');
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Proxima Nova';
-  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-bold.otf') format('opentype');
+  font-family: 'Open Sans';
+  src: url('/assets/Open Sans/OpenSans-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Proxima Nova';
-  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-boldit.otf') format('opentype');
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Proxima Nova';
-  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-extrabold.otf') format('opentype');
+  font-family: 'Open Sans';
+  src: url('/assets/Open Sans/OpenSans-ExtraBold.ttf') format('truetype');
   font-weight: 800;
   font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Proxima Nova';
-  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-extraboldit.otf') format('opentype');
-  font-weight: 800;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Proxima Nova';
-  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-black.otf') format('opentype');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Proxima Nova';
-  src: url('/assets/Demo_Fonts/Fontspring-DEMO-proximanova-blackit.otf') format('opentype');
-  font-weight: 900;
-  font-style: italic;
   font-display: swap;
 }
 

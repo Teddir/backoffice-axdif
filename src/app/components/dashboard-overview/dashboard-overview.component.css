@@ -5,7 +5,7 @@
 .dashboard-container {
   min-height: 100vh;
   background: #f7fafc;
-  font-family: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 .dashboard-content {
@@ -54,7 +54,7 @@
 
 .section-title {
   text-align: left;
-  font: normal normal bold 20px/24px 'Proxima Nova';
+  font: normal normal bold 20px/24px 'Open Sans';
   letter-spacing: 0px;
   color: #212121;
   text-transform: capitalize;
@@ -74,7 +74,7 @@
 
 .period-label {
   text-align: left;
-  font: normal normal normal 14px/20px 'Proxima Nova';
+  font: normal normal normal 14px/20px 'Open Sans';
   letter-spacing: 0px;
   color: #212121;
   opacity: 1;
@@ -96,7 +96,7 @@
   padding: 8px 36px 8px 12px !important;
   border: 1px solid #D4D4D4 !important;
   border-radius: 6px !important;
-  font: normal normal 600 14px/20px 'Proxima Nova' !important;
+  font: normal normal 600 14px/20px 'Open Sans' !important;
   color: #212121 !important;
   background: white !important;
   cursor: pointer !important;
@@ -156,16 +156,16 @@
 
 .card-label {
   text-align: left;
-  font: normal normal 600 14px/20px 'Proxima Nova';
+  font: normal normal 600 14px/20px 'Open Sans';
   letter-spacing: 0px;
   color: #808D93;
   opacity: 1;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .card-value {
   text-align: left;
-  font: normal normal bold 20px/24px 'Proxima Nova';
+  font: normal normal bold 20px/24px 'Open Sans';
   letter-spacing: 0px;
   color: #212121;
   opacity: 1;
@@ -198,7 +198,7 @@
 
 .task-role {
   text-align: left;
-  font: normal normal 600 14px/20px 'Proxima Nova';
+  font: normal normal 600 14px/20px 'Open Sans';
   letter-spacing: 0px;
   color: #808D93;
   opacity: 1;
@@ -207,7 +207,7 @@
 
 .task-title {
   text-align: left;
-  font: normal normal bold 16px/22px 'Proxima Nova';
+  font: normal normal bold 16px/22px 'Open Sans';
   letter-spacing: 0px;
   color: #212121;
   text-transform: capitalize;
@@ -226,7 +226,7 @@
   align-items: center;
   gap: 12px;
   text-align: left;
-  font: normal normal 600 14px/20px 'Proxima Nova';
+  font: normal normal 600 14px/20px 'Open Sans';
   letter-spacing: 0px;
   color: #808D93;
   opacity: 1;
@@ -257,7 +257,7 @@
   border-radius: 12px;
   white-space: nowrap;
   text-align: center;
-  font: normal normal normal 14px/20px 'Proxima Nova';
+  font: normal normal normal 14px/20px 'Open Sans';
   letter-spacing: 0px;
   opacity: 1;
 }
@@ -283,7 +283,7 @@
   gap: 4px;
   white-space: nowrap;
   text-align: left;
-  font: normal normal 600 14px/20px 'Proxima Nova';
+  font: normal normal 600 14px/20px 'Open Sans';
   letter-spacing: 0px;
   color: #808D93;
   opacity: 1;
@@ -291,7 +291,7 @@
 
 .see-all-link {
   text-align: left;
-  font: normal normal 600 14px/20px 'Proxima Nova';
+  font: normal normal 600 14px/20px 'Open Sans';
   letter-spacing: 0px;
   color: #0796E5;
   opacity: 1;
@@ -362,17 +362,17 @@
 
 .employee-name {
   text-align: center;
-  font: normal normal bold 20px/24px 'Proxima Nova';
+  font: normal normal bold 20px/24px 'Open Sans';
   letter-spacing: 0px;
   color: #000000;
   text-transform: capitalize;
   opacity: 1;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .employee-company {
   text-align: center;
-  font: normal normal normal 16px/20px 'Proxima Nova';
+  font: normal normal normal 16px/20px 'Open Sans';
   letter-spacing: 0px;
   color: #000000;
   text-transform: capitalize;
@@ -417,7 +417,7 @@
 
 .detail-label {
   text-align: left;
-  font: normal normal normal 14px/20px 'Proxima Nova';
+  font: normal normal normal 14px/20px 'Open Sans';
   letter-spacing: 0px;
   color: #808D93;
   opacity: 1;
@@ -425,7 +425,7 @@
 
 .detail-value {
   color: #000000;
-  font: normal normal normal 14px/20px 'Proxima Nova';
+  font: normal normal normal 14px/20px 'Open Sans';
   text-align: right;
   opacity: 1;
 }
@@ -444,7 +444,7 @@
 
 .card-title {
   text-align: left;
-  font: normal normal bold 20px/24px 'Proxima Nova';
+  font: normal normal bold 20px/24px 'Open Sans';
   letter-spacing: 0px;
   color: #212121;
   text-transform: capitalize;
@@ -493,13 +493,13 @@
 }
 
 .time-label {
-  font: normal normal normal 13px/18px 'Proxima Nova';
+  font: normal normal normal 13px/18px 'Open Sans';
   color: #718096;
   margin-bottom: 8px;
 }
 
 .time-value {
-  font: normal normal bold 20px/24px 'Proxima Nova';
+  font: normal normal bold 20px/24px 'Open Sans';
   color: #000037;
 }
 
@@ -569,7 +569,7 @@
   }
 
   .section-title {
-    font: normal normal bold 18px/22px 'Proxima Nova';
+    font: normal normal bold 18px/22px 'Open Sans';
   }
 
   /* Period Selector */
@@ -592,7 +592,7 @@
 
   ::ng-deep .period-selector .p-inputtext {
     padding: 12px 32px 12px 12px !important;
-    font: normal normal 600 12px/16px 'Proxima Nova' !important;
+    font: normal normal 600 12px/16px 'Open Sans' !important;
     width: 100% !important;
   }
 
@@ -619,7 +619,7 @@
   }
 
   ::ng-deep .period-calendar-panel .p-datepicker-title {
-    font: normal normal 600 14px/20px 'Proxima Nova' !important;
+    font: normal normal 600 14px/20px 'Open Sans' !important;
   }
 
   ::ng-deep .period-calendar-panel .p-datepicker-prev-button,
@@ -634,7 +634,7 @@
   }
 
   ::ng-deep .period-calendar-panel .p-datepicker-calendar th {
-    font: normal normal 600 12px/16px 'Proxima Nova' !important;
+    font: normal normal 600 12px/16px 'Open Sans' !important;
     padding: 8px 4px !important;
   }
 
@@ -645,7 +645,7 @@
   ::ng-deep .period-calendar-panel .p-datepicker-calendar td > span {
     width: 36px !important;
     height: 36px !important;
-    font: normal normal normal 14px/20px 'Proxima Nova' !important;
+    font: normal normal normal 14px/20px 'Open Sans' !important;
     border-radius: 6px !important;
   }
 
@@ -676,12 +676,12 @@
   }
 
   .card-label {
-    font: normal normal 600 12px/16px 'Proxima Nova';
+    font: normal normal 600 12px/16px 'Open Sans';
     margin-bottom: 6px;
   }
 
   .card-value {
-    font: normal normal bold 16px/20px 'Proxima Nova';
+    font: normal normal bold 16px/20px 'Open Sans';
   }
 
   /* Task Section */
@@ -702,23 +702,23 @@
   }
 
   .task-role {
-    font: normal normal 600 10px/16px 'Proxima Nova';
+    font: normal normal 600 10px/16px 'Open Sans';
   }
 
   .task-title {
-    font: normal normal normal 14px/18px 'Proxima Nova';
+    font: normal normal normal 14px/18px 'Open Sans';
     color: #000000;
   }
 
   .priority-badge {
-    font: normal normal 600 10px/16px 'Proxima Nova';
+    font: normal normal 600 10px/16px 'Open Sans';
   }
 
   .task-icons {
-    font: normal normal 600 10px/16px 'Proxima Nova';
+    font: normal normal 600 10px/16px 'Open Sans';
   }
 
   .date-badge {
-    font: normal normal 600 10px/16px 'Proxima Nova';
+    font: normal normal 600 10px/16px 'Open Sans';
   }
 }
