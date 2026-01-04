@@ -29,7 +29,8 @@ export class AuthService {
     if (storage) {
       const userData = { ...user, password };
       storage.setItem(this.USER_KEY, JSON.stringify(userData));
-      storage.setItem(this.IS_LOGGED_IN_KEY, 'true');
+      // Don't automatically log in after registration
+      // User must manually log in using the login page
     }
   }
 
@@ -52,13 +53,22 @@ export class AuthService {
     const storage = this.getStorage();
     if (storage) {
       storage.removeItem(this.IS_LOGGED_IN_KEY);
+      // Note: We keep user data in storage so user can login again
+      // If you want to clear user data on logout, uncomment the line below:
+      // storage.removeItem(this.USER_KEY);
     }
   }
 
   isLoggedIn(): boolean {
     const storage = this.getStorage();
     if (!storage) return false;
-    return storage.getItem(this.IS_LOGGED_IN_KEY) === 'true';
+    
+    // Check if login flag is set and user data exists
+    const isLoggedIn = storage.getItem(this.IS_LOGGED_IN_KEY) === 'true';
+    const userData = storage.getItem(this.USER_KEY);
+    
+    // User is logged in only if both login flag is true AND user data exists
+    return isLoggedIn && !!userData;
   }
 
   getCurrentUser(): User | null {
