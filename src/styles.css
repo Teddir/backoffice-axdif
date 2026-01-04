@@ -17,6 +17,15 @@
 .p-inputtext {
   --p-inputtext-border-color: #888FB0;
 }
+
+.p-datepicker-day,
+.p-datepicker-month,
+.p-datepicker-year
+{
+  --p-datepicker-date-selected-background: #0796E5;
+}
+
+
 /* Proxima Nova Font - Local font files */
 @font-face {
   font-family: 'Proxima Nova';

@@ -1,0 +1,168 @@
+<!-- ============================================================================
+     Navigation Bar Component
+     ============================================================================ -->
+<nav class="navbar">
+  <!-- Left Section: Logo & Desktop Navigation -->
+  <div class="nav-left">
+    <div class="logo">
+      <img src="/dashboard/logo-icon.svg" alt="Axdif Logo" class="logo-icon" />
+    </div>
+    <div class="nav-separator"></div>
+    <div class="nav-links">
+      @for (link of navLinks; track link.route) {
+        @if (link.isDropdown) {
+          <!-- Submission Dropdown -->
+          <div class="submission-dropdown-wrapper">
+            <a 
+              class="nav-link submission-dropdown-link" 
+              [class.active]="isActive(link.route) || showSubmissionDropdown"
+              (click)="navigateToRoute(link.route)">
+              {{ link.label }} <span class="dropdown-arrow"></span>
+            </a>
+            @if (showSubmissionDropdown) {
+              <div class="submission-dropdown" (click)="$event.stopPropagation()">
+                <div class="submission-header">
+                  <h2 class="submission-title">Submission</h2>
+                </div>
+                <div class="submission-grid">
+                  @for (option of submissionOptions; track option.id) {
+                    <div class="submission-card" (click)="navigateToSubmission(option.id)">
+                      <div class="submission-card-content">
+                        <div class="submission-icon">
+                          <img [src]="option.icon" [alt]="option.title" />
+                        </div>
+                        <h3 class="submission-card-title">{{ option.title }}</h3>
+                      </div>
+                      <p class="submission-card-description">{{ option.description }}</p>
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        } @else {
+          <!-- Regular Navigation Link -->
+          <a 
+            class="nav-link" 
+            [class.active]="isActive(link.route)" 
+            (click)="navigateToRoute(link.route)">
+            {{ link.label }}
+          </a>
+        }
+      }
+    </div>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <div class="nav-links-mobile">
+    <div class="nav-dropdown-wrapper">
+      <a 
+        class="nav-link" 
+        [class.active]="isActive('/dashboard/overview') || showNavDropdown" 
+        (click)="toggleNavDropdown()">
+        {{ getCurrentPageLabel() }} 
+        <img src="/dashboard/icon - ChevronDown.svg" alt="Chevron Down" class="chevron-icon-down" />
+      </a>
+      @if (showNavDropdown) {
+        <div class="nav-dropdown" (click)="$event.stopPropagation()">
+          @for (navLink of navLinks; track navLink.route) {
+            @if (navLink.route === '/dashboard/overview') {
+              <div 
+                class="nav-dropdown-item" 
+                [class.active]="isActive(navLink.route)"
+                (click)="navigateToRoute(navLink.route)">
+                {{ navLink.label }}
+              </div>
+            } @else if (navLink.isDropdown) {
+              <div class="nav-dropdown-item dropdown" (click)="navigateToRoute(navLink.route)">
+                <p>{{ navLink.label }}</p>
+                <img src="/dashboard/icon - ChevronDownSolid.svg" alt="Chevron Down Solid" class="chevron-icon-down" />
+              </div>
+            } @else {
+              <div 
+                class="nav-dropdown-item" 
+                [class.active]="isActive(navLink.route)"
+                (click)="navigateToRoute(navLink.route)">
+                {{ navLink.label }}
+              </div>
+            }
+          }
+        </div>
+      }
+      @if (showSubmissionDropdown) {
+        <div class="submission-dropdown" (click)="$event.stopPropagation()">
+          <div class="submission-header">
+            <h2 class="submission-title">Submission</h2>
+          </div>
+          <div class="submission-grid">
+            @for (option of submissionOptions; track option.id) {
+              <div class="submission-card" (click)="navigateToSubmission(option.id)">
+                <div class="submission-card-content">
+                  <div class="submission-icon">
+                    <img [src]="option.icon" [alt]="option.title" />
+                  </div>
+                  <h3 class="submission-card-title">{{ option.title }}</h3>
+                </div>
+                <p class="submission-card-description">{{ option.description }}</p>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Right Section: Profile -->
+  <div class="nav-right">
+    <div class="profile-picture-wrapper">
+      <div class="profile-picture" (click)="toggleProfileDropdown()">
+        <img src="/dashboard/Profile Picture.png" alt="Profile" />
+      </div>
+      @if (showProfileDropdown) {
+        <div class="profile-dropdown" (click)="$event.stopPropagation()">
+          <!-- User Info -->
+          <div class="dropdown-user-info">
+            <div class="dropdown-avatar">
+              <img src="/dashboard/Profile Picture.png" alt="{{ user?.fullname || 'User' }}" />
+            </div>
+            <div class="dropdown-user-details">
+              <div class="dropdown-name">{{ user?.fullname || 'Muhammad Iqra Djauhari' }}</div>
+              <div class="dropdown-email">{{ user?.email || 'iqra@elabram.com' }}</div>
+              <div class="dropdown-badge">Employe</div>
+            </div>
+          </div>
+          
+          <div class="dropdown-divider"></div>
+          
+          <!-- My Profile -->
+          <div class="dropdown-menu-item" (click)="navigateToProfile()">
+            <img src="/dashboard/icon - User.svg" alt="My Profile" />
+            <span>My Profile</span>
+          </div>
+          
+          <div class="dropdown-divider"></div>
+          
+          <!-- Appearance Section -->
+          <div class="dropdown-section">
+            <div class="dropdown-section-label">Appearance</div>
+            <div class="dropdown-menu-item toggle-item">
+              <span>Dark Mode</span>
+              <label class="toggle-switch">
+                <input type="checkbox" [(ngModel)]="darkMode" (change)="toggleDarkMode()" />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="dropdown-divider"></div>
+          
+          <!-- Log Out -->
+          <div class="dropdown-menu-item logout-item" (click)="logout()">
+            <img src="/dashboard/icon - Logout.svg" alt="Log Out" />
+            <span>Log Out</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</nav>

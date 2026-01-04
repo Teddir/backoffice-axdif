@@ -102,7 +102,7 @@
                 <div class="form-group" data-field="password">
                   <label for="password">Password</label>
                   <p-password id="password" formControlName="password" placeholder="Insert Password" [toggleMask]="true"
-                    [feedback]="false" class="w-full" inputStyleClass="w-full"
+                    [feedback]="false"  [autofocus]="false" class="w-full" inputStyleClass="w-full"
                     [ngClass]="{'error': hasFieldError('password')}"></p-password>
                   @if (hasFieldError('password')) {
                     <small class="error-message">
@@ -136,7 +136,7 @@
                 <div class="form-group" data-field="confirmPassword">
                   <label for="confirmPassword">Confirm Password</label>
                   <p-password id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm Password"
-                    [toggleMask]="true" [feedback]="false" class="w-full" inputStyleClass="w-full"
+                    [toggleMask]="true"  [autofocus]="false" [feedback]="false" class="w-full" inputStyleClass="w-full"
                     [ngClass]="{'error': hasFieldError('confirmPassword')}"></p-password>
                   @if (hasFieldError('confirmPassword')) {
                     <small class="error-message">

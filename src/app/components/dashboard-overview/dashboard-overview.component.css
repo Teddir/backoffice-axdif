@@ -1,108 +1,16 @@
+/* ============================================================================
+   Dashboard Container & Layout
+   ============================================================================ */
+
 .dashboard-container {
   min-height: 100vh;
   background: #f7fafc;
   font-family: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-.navbar {
-  background: white;
-  border-bottom: 1px solid #e2e8f0;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.nav-left {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo-icon {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #667eea 0%, #f97316 100%);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 700;
-  font-size: 1.25rem;
-}
-
-.nav-links {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.nav-link {
-  font-size: 0.875rem;
-  color: #718096;
-  text-decoration: none;
-  cursor: pointer;
-  transition: color 0.2s;
-  position: relative;
-}
-
-.nav-link:hover {
-  color: #2d3748;
-}
-
-.nav-link.active {
-  color: #667eea;
-  font-weight: 600;
-}
-
-.nav-link.active::after {
-  content: '';
-  position: absolute;
-  bottom: -1rem;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: #667eea;
-}
-
-.dropdown-arrow {
-  font-size: 0.75rem;
-  margin-left: 0.25rem;
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-}
-
-.profile-picture {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  cursor: pointer;
-  border: 2px solid #e2e8f0;
-}
-
-.profile-picture img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .dashboard-content {
   display: flex;
-  gap: 2rem;
+  gap: 24px;
   padding: 2rem;
   max-width: 1400px;
   margin: 0 auto;
@@ -112,176 +20,281 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 24px;
 }
 
 .sidebar {
-  width: 350px;
+  width: 500px;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 24px;
 }
+
+/* ============================================================================
+   Common Section Styles
+   ============================================================================ */
 
 .summary-section,
 .tasks-section {
   background: white;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 2px #00000005;
+  border: 1px solid #E2E8F0;
 }
 
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1.5px solid #E2E8F0;
 }
 
 .section-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #1a202c;
+  text-align: left;
+  font: normal normal bold 20px/24px 'Proxima Nova';
+  letter-spacing: 0px;
+  color: #212121;
+  text-transform: capitalize;
+  opacity: 1;
+  margin: 0;
+}
+
+/* ============================================================================
+   Summary Section - Period Selector
+   ============================================================================ */
+
+.period-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.period-label {
+  text-align: left;
+  font: normal normal normal 14px/20px 'Proxima Nova';
+  letter-spacing: 0px;
+  color: #212121;
+  opacity: 1;
+  margin: 0;
 }
 
 .period-selector {
   position: relative;
-  width: 150px;
+  width: 180px;
 }
 
-.period-input {
+/* PrimeNG DatePicker Styles */
+::ng-deep .period-selector .p-calendar {
   width: 100%;
-  padding: 0.5rem 2.5rem 0.5rem 0.75rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  color: #2d3748;
-  background: white;
 }
 
-.period-input:focus {
-  outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+::ng-deep .period-selector .p-inputtext {
+  width: 100% !important;
+  padding: 8px 36px 8px 12px !important;
+  border: 1px solid #D4D4D4 !important;
+  border-radius: 6px !important;
+  font: normal normal 600 14px/20px 'Proxima Nova' !important;
+  color: #212121 !important;
+  background: white !important;
+  cursor: pointer !important;
 }
 
-.calendar-icon {
-  position: absolute;
-  right: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  font-size: 1rem;
+::ng-deep .period-selector .p-inputtext:focus,
+::ng-deep .period-input:focus {
+  outline: none !important;
+  border-color: #0796E5 !important;
+  box-shadow: 0 0 0 3px rgba(7, 150, 229, 0.1) !important;
 }
+
+::ng-deep .period-calendar-panel {
+  border: 1px solid #0796E5 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  background: white !important;
+}
+
+::ng-deep .period-calendar-panel .p-datepicker-header {
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+::ng-deep .period-calendar-panel .p-datepicker-prev-button,
+::ng-deep .period-calendar-panel .p-datepicker-next-button {
+  color: #0796E5 !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+
+::ng-deep .period-calendar-panel .p-datepicker-prev-button:hover,
+::ng-deep .period-calendar-panel .p-datepicker-next-button:hover {
+  background: #E1F4FE !important;
+  border-radius: 4px !important;
+}
+
+/* ============================================================================
+   Summary Section - Cards
+   ============================================================================ */
 
 .summary-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  gap: 16px;
 }
 
 .summary-card {
-  background: #f7fafc;
+  background: white;
   border-radius: 8px;
-  padding: 1rem;
-  border: 1px solid #e2e8f0;
+  padding: 18px 24px;
+  border: 1px solid #818E941A;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-label {
-  font-size: 0.75rem;
-  color: #718096;
-  margin-bottom: 0.5rem;
+  text-align: left;
+  font: normal normal 600 14px/20px 'Proxima Nova';
+  letter-spacing: 0px;
+  color: #808D93;
+  opacity: 1;
+  margin-bottom: 8px;
 }
 
 .card-value {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #2d3748;
+  text-align: left;
+  font: normal normal bold 20px/24px 'Proxima Nova';
+  letter-spacing: 0px;
+  color: #212121;
+  opacity: 1;
 }
+
+/* ============================================================================
+   Tasks Section
+   ============================================================================ */
 
 .tasks-list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 12px;
 }
 
 .task-item {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  padding: 1rem;
-  background: #f7fafc;
+  align-items: center;
+  padding: 18px 24px;
+  background: white;
   border-radius: 8px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #818E941A;
 }
 
 .task-info {
   flex: 1;
+  min-width: 0;
 }
 
 .task-role {
-  font-size: 0.75rem;
-  color: #718096;
-  margin-bottom: 0.25rem;
+  text-align: left;
+  font: normal normal 600 14px/20px 'Proxima Nova';
+  letter-spacing: 0px;
+  color: #808D93;
+  opacity: 1;
+  margin-bottom: 4px;
 }
 
 .task-title {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #2d3748;
+  text-align: left;
+  font: normal normal bold 16px/22px 'Proxima Nova';
+  letter-spacing: 0px;
+  color: #212121;
+  text-transform: capitalize;
+  opacity: 1;
 }
 
 .task-meta {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
 }
 
 .task-icons {
   display: flex;
-  gap: 0.75rem;
-  font-size: 0.75rem;
-  color: #718096;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  font: normal normal 600 14px/20px 'Proxima Nova';
+  letter-spacing: 0px;
+  color: #808D93;
+  opacity: 1;
 }
 
-.task-badges {
+.icon-attachment,
+.icon-comment {
   display: flex;
-  gap: 0.5rem;
   align-items: center;
+  gap: 4px;
+}
+
+.attachment-icon,
+.comment-icon,
+.date-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.task-separator {
+  width: 1px;
+  height: 20px;
+  background: #D4D4D4;
 }
 
 .priority-badge {
-  padding: 0.25rem 0.75rem;
+  padding: 4px 12px;
   border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 500;
+  white-space: nowrap;
+  text-align: center;
+  font: normal normal normal 14px/20px 'Proxima Nova';
+  letter-spacing: 0px;
+  opacity: 1;
 }
 
 .priority-badge.priority-medium {
-  background: #fed7aa;
-  color: #7c2d12;
+  background: #D1FAE5;
+  color: #09A262;
 }
 
 .priority-badge.priority-low {
-  background: #c6f6d5;
-  color: #22543d;
+  background: #D1FAE5;
+  color: #065F46;
 }
 
 .priority-badge.priority-high {
-  background: #fecaca;
-  color: #991b1b;
+  background: #FEE2E2;
+  color: #991B1B;
 }
 
 .date-badge {
-  font-size: 0.75rem;
-  color: #718096;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  text-align: left;
+  font: normal normal 600 14px/20px 'Proxima Nova';
+  letter-spacing: 0px;
+  color: #808D93;
+  opacity: 1;
 }
 
 .see-all-link {
-  font-size: 0.875rem;
-  color: #667eea;
-  text-decoration: none;
-  font-weight: 500;
+  text-align: left;
+  font: normal normal 600 14px/20px 'Proxima Nova';
+  letter-spacing: 0px;
+  color: #0796E5;
+  opacity: 1;
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -292,32 +305,45 @@
   text-decoration: underline;
 }
 
+.chevron-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+/* ============================================================================
+   Employee Card
+   ============================================================================ */
+
 .employee-card {
   background: white;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 2px #00000005;
+  border: 1px solid #E2E8F0;
+  position: relative;
 }
 
 .employee-banner {
-  height: 120px;
-  background: linear-gradient(135deg, #a0c4ff 0%, #bdb2ff 100%);
+  height: 140px;
   position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #E1F4FE 0%, #B8E6FF 100%);
 }
 
-.employee-banner::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  opacity: 0.3;
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .employee-avatar {
-  position: relative;
-  margin-top: -50px;
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
   text-align: center;
-  z-index: 1;
 }
 
 .employee-avatar img {
@@ -325,142 +351,374 @@
   height: 100px;
   border-radius: 50%;
   border: 4px solid white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  object-fit: cover;
 }
 
 .employee-info {
-  padding: 1.5rem 1.5rem 1.5rem;
+  padding: 74px 1.5rem 1.5rem;
   text-align: center;
 }
 
 .employee-name {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #1a202c;
-  margin-bottom: 0.5rem;
+  text-align: center;
+  font: normal normal bold 20px/24px 'Proxima Nova';
+  letter-spacing: 0px;
+  color: #000000;
+  text-transform: capitalize;
+  opacity: 1;
+  margin-bottom: 8px;
 }
 
 .employee-company {
-  font-size: 0.875rem;
-  color: #718096;
-  margin-bottom: 1.5rem;
+  text-align: center;
+  font: normal normal normal 16px/20px 'Proxima Nova';
+  letter-spacing: 0px;
+  color: #000000;
+  text-transform: capitalize;
+  opacity: 1;
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 6px;
+}
+
+.company-icon {
+  font-size: 16px;
+  display: inline-block;
+}
+
+.company-name {
+  display: inline-block;
+}
+
+.employee-separator {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 0 0 16px 0;
+  width: 100%;
 }
 
 .employee-details {
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 12px;
+  padding-top: 4px;
 }
 
 .detail-item {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.875rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  align-items: start;
 }
 
 .detail-label {
-  color: #718096;
+  text-align: left;
+  font: normal normal normal 14px/20px 'Proxima Nova';
+  letter-spacing: 0px;
+  color: #808D93;
+  opacity: 1;
 }
 
 .detail-value {
-  color: #2d3748;
-  font-weight: 500;
+  color: #000000;
+  font: normal normal normal 14px/20px 'Proxima Nova';
+  text-align: right;
+  opacity: 1;
 }
+
+/* ============================================================================
+   Attendance Card
+   ============================================================================ */
 
 .attendance-card {
   background: white;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 2px #00000005;
+  border: 1px solid #E2E8F0;
 }
 
 .card-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #1a202c;
-  margin-bottom: 1rem;
+  text-align: left;
+  font: normal normal bold 20px/24px 'Proxima Nova';
+  letter-spacing: 0px;
+  color: #212121;
+  text-transform: capitalize;
+  opacity: 1;
+  margin-bottom: 16px;
+}
+
+.attendance-separator {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 0 0 16px 0;
+  width: 100%;
 }
 
 .attendance-times {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  flex-direction: row;
+  gap: 12px;
 }
 
 .time-item {
-  background: #f7fafc;
-  border-radius: 8px;
-  padding: 1rem;
-  border-left: 4px solid;
+  background: white;
+  border: 1px solid #e2e8f0;
+  padding: 16px;
+  flex: 1;
+  border-radius: 6px;
+  position: relative;
 }
 
-.time-item.clock-in {
-  border-left-color: #10b981;
+.time-color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
 }
 
-.time-item.clock-out {
-  border-left-color: #e53e3e;
+.time-color.in {
+  background: #09A262;
+  border-radius: 5px 5px 0 0;
+}
+
+.time-color.out {
+  background: #FF2442;
+  border-radius: 5px 5px 0 0;
 }
 
 .time-label {
-  font-size: 0.75rem;
+  font: normal normal normal 13px/18px 'Proxima Nova';
   color: #718096;
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
 }
 
 .time-value {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #2d3748;
+  font: normal normal bold 20px/24px 'Proxima Nova';
+  color: #000037;
 }
 
-/* Responsive Design */
+/* ============================================================================
+   Responsive Design - Tablet (max-width: 1024px)
+   ============================================================================ */
+
 @media (max-width: 1024px) {
   .dashboard-content {
     flex-direction: column;
+    padding: 1rem;
+    gap: 16px;
   }
 
   .sidebar {
     width: 100%;
+    display: contents;
+  }
+
+  .main-panel {
+    display: contents;
+  }
+
+  /* Section Ordering */
+  .employee-card {
+    order: 1;
+  }
+
+  .summary-section {
+    order: 2;
+  }
+
+  .attendance-card {
+    order: 3;
+  }
+
+  .tasks-section {
+    order: 4;
   }
 
   .summary-cards {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .task-meta {
+    gap: 16px;
+  }
 }
 
+/* ============================================================================
+   Responsive Design - Mobile (max-width: 768px)
+   ============================================================================ */
+
 @media (max-width: 768px) {
-  .navbar {
-    padding: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .nav-links {
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
   .dashboard-content {
     padding: 1rem;
   }
 
-  .summary-cards {
-    grid-template-columns: 1fr;
+  /* Summary Section */
+  .summary-section {
+    padding: 1rem;
   }
 
+  .section-header {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+
+  .section-title {
+    font: normal normal bold 18px/22px 'Proxima Nova';
+  }
+
+  /* Period Selector */
+  .period-wrapper {
+    gap: 8px;
+  }
+
+  .period-label {
+    display: none;
+  }
+
+  .period-selector {
+    width: 100px;
+    position: relative;
+  }
+
+  ::ng-deep .period-selector .p-datepicker {
+    width: 100%;
+  }
+
+  ::ng-deep .period-selector .p-inputtext {
+    padding: 12px 32px 12px 12px !important;
+    font: normal normal 600 12px/16px 'Proxima Nova' !important;
+    width: 100% !important;
+  }
+
+  ::ng-deep .period-selector .callendar-icon-template {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  /* Date Picker Panel */
+  ::ng-deep .period-calendar-panel {
+    position: fixed !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    top: 50% !important;
+    margin-top: -150px !important;
+    width: 90vw !important;
+    max-width: 320px !important;
+    z-index: 9999 !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  ::ng-deep .period-calendar-panel .p-datepicker-header {
+    padding: 12px !important;
+  }
+
+  ::ng-deep .period-calendar-panel .p-datepicker-title {
+    font: normal normal 600 14px/20px 'Proxima Nova' !important;
+  }
+
+  ::ng-deep .period-calendar-panel .p-datepicker-prev-button,
+  ::ng-deep .period-calendar-panel .p-datepicker-next-button {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 14px !important;
+  }
+
+  ::ng-deep .period-calendar-panel .p-datepicker-calendar {
+    padding: 8px !important;
+  }
+
+  ::ng-deep .period-calendar-panel .p-datepicker-calendar th {
+    font: normal normal 600 12px/16px 'Proxima Nova' !important;
+    padding: 8px 4px !important;
+  }
+
+  ::ng-deep .period-calendar-panel .p-datepicker-calendar td {
+    padding: 4px !important;
+  }
+
+  ::ng-deep .period-calendar-panel .p-datepicker-calendar td > span {
+    width: 36px !important;
+    height: 36px !important;
+    font: normal normal normal 14px/20px 'Proxima Nova' !important;
+    border-radius: 6px !important;
+  }
+
+  /* Date Picker Overlay */
+  ::ng-deep .p-datepicker-overlay {
+    z-index: 9998 !important;
+  }
+
+  ::ng-deep .p-datepicker-overlay::before {
+    content: '' !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    z-index: -1 !important;
+  }
+
+  /* Summary Cards */
+  .summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .summary-card {
+    padding: 14px 16px;
+  }
+
+  .card-label {
+    font: normal normal 600 12px/16px 'Proxima Nova';
+    margin-bottom: 6px;
+  }
+
+  .card-value {
+    font: normal normal bold 16px/20px 'Proxima Nova';
+  }
+
+  /* Task Section */
   .task-item {
     flex-direction: column;
-    gap: 1rem;
+    gap: 8px;
+    padding: 8px 12px;
+    align-items: flex-start;
   }
 
   .task-meta {
-    align-items: flex-start;
     width: 100%;
+    gap: 12px;
+  }
+
+  .task-meta .task-separator {
+    display: none;
+  }
+
+  .task-role {
+    font: normal normal 600 10px/16px 'Proxima Nova';
+  }
+
+  .task-title {
+    font: normal normal normal 14px/18px 'Proxima Nova';
+    color: #000000;
+  }
+
+  .priority-badge {
+    font: normal normal 600 10px/16px 'Proxima Nova';
+  }
+
+  .task-icons {
+    font: normal normal 600 10px/16px 'Proxima Nova';
+  }
+
+  .date-badge {
+    font: normal normal 600 10px/16px 'Proxima Nova';
   }
 }
-

@@ -1,0 +1,602 @@
+/* ============================================================================
+   Navigation Bar
+   ============================================================================ */
+
+.navbar {
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 16px 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* ============================================================================
+   Left Section: Logo & Navigation
+   ============================================================================ */
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.nav-separator {
+  width: 1px;
+  height: 32px;
+  background: #e2e8f0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* ============================================================================
+   Navigation Links
+   ============================================================================ */
+
+.nav-link {
+  font: normal normal bold 18px/24px 'Proxima Nova';
+  letter-spacing: 0px;
+  color: #888FB0;
+  opacity: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  position: relative;
+  padding: 14px 20px;
+}
+
+.nav-link:hover {
+  color: #0796E5;
+  background: #E1F4FE;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.nav-link.active {
+  color: #000037;
+  background: #F4F6FF;
+  border-radius: 6px;
+}
+
+.nav-link.submission-dropdown-link.active {
+  color: #0796E5;
+  background: #E1F4FE;
+  border-radius: 6px;
+}
+
+.nav-link.active::after {
+  display: none;
+}
+
+/* Dropdown Arrow */
+.dropdown-arrow {
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid #888FB0;
+  border-bottom: 2px solid #888FB0;
+  transform: rotate(45deg);
+  display: inline-block;
+  margin-bottom: 2px;
+  margin-left: 6px;
+}
+
+.nav-link.submission-dropdown-link:hover .dropdown-arrow,
+.nav-link.submission-dropdown-link.active .dropdown-arrow {
+  border-right: 2px solid #0796E5;
+  border-bottom: 2px solid #0796E5;
+}
+
+.nav-link.active .dropdown-arrow {
+  border-right: 2px solid #000037;
+  border-bottom: 2px solid #000037;
+}
+
+/* ============================================================================
+   Navigation Dropdown (Mobile)
+   ============================================================================ */
+
+.nav-dropdown-wrapper {
+  position: relative;
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  min-width: 240px;
+  z-index: 1000;
+  padding: 12px 0;
+  border: 1px solid #e2e8f0;
+}
+
+/* ============================================================================
+   Submission Dropdown
+   ============================================================================ */
+.submission-dropdown-wrapper {
+  position: static;
+}
+
+.submission-dropdown {
+  position: fixed;
+  top: 86px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: white;
+  box-shadow: 0 0px 8px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  padding: 24px 0;
+  border-top: 1px solid #e2e8f0;
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+}
+
+/* Remove triangle tooltip for full-width dropdown */
+.submission-dropdown::before,
+.submission-dropdown::after {
+  display: none;
+}
+
+.submission-header {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 92px;
+}
+
+.submission-title {
+  font: normal normal bold 20px/28px 'Proxima Nova';
+  letter-spacing: 0px;
+  color: #0796E5;
+  text-transform: capitalize;
+  opacity: 1;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.submission-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 92px;
+}
+
+.submission-card {
+  padding: 28px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  text-align: center;
+  gap: 0;
+  justify-content: flex-start;
+}
+
+.submission-card-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.submission-card:hover {
+  background-color: #E1F4FE;
+}
+
+.submission-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.submission-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.submission-card-title {
+  text-align: left;
+  font: normal normal bold 18px/24px 'Proxima Nova';
+  letter-spacing: 0px;
+  color: #000037;
+  opacity: 1;
+}
+
+.submission-card-description {
+  text-align: left;
+  font: normal normal normal 14px/18px 'Proxima Nova';
+  letter-spacing: 0px;
+  color: #000037;
+  opacity: 1;
+}
+
+/* ============================================================================
+   Right Section: Profile
+   ============================================================================ */
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.profile-picture-wrapper {
+  position: relative;
+}
+
+.profile-picture {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid #e2e8f0;
+  transition: border-color 0.2s;
+}
+
+.profile-picture:hover {
+  border-color: #0796E5;
+}
+
+.profile-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============================================================================
+   Profile Dropdown
+   ============================================================================ */
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  min-width: 280px;
+  z-index: 1000;
+  overflow: visible;
+}
+
+/* Triangle tooltip pointing to profile picture */
+.profile-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 16px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+  z-index: 1001;
+}
+
+/* Optional: Add a subtle shadow effect for the triangle */
+.profile-dropdown::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  right: 15px;
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 9px solid rgba(0, 0, 0, 0.05);
+  z-index: 999;
+}
+
+.dropdown-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+
+.dropdown-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.dropdown-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dropdown-user-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.dropdown-name {
+  font: normal normal bold 16px/20px 'Proxima Nova';
+  color: #2A2F31;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-email {
+  font: normal normal normal 14px/20px 'Proxima Nova';
+  color: #808D93;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #0796E51F;
+  color: #0796E5;
+  border-radius: 12px;
+  font: normal normal normal 12px/16px 'Proxima Nova';
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 0;
+}
+
+.dropdown-section {
+  padding: 0;
+}
+
+.dropdown-section-label {
+  font: normal normal normal 10px/14px 'Proxima Nova';
+  color: #808D93;
+  padding: 12px 16px 0px 16px;
+}
+
+.dropdown-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font: normal normal 600 14px/20px 'Proxima Nova';
+  color: #212121;
+}
+
+.dropdown-menu-item img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.dropdown-menu-item:hover {
+  background: #f7fafc;
+}
+
+.dropdown-menu-item.toggle-item {
+  justify-content: space-between;
+  padding-top: 4px;
+}
+
+.dropdown-icon {
+  flex-shrink: 0;
+}
+
+/* ============================================================================
+   Toggle Switch (Dark Mode)
+   ============================================================================ */
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cbd5e0;
+  transition: 0.3s;
+  border-radius: 24px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: #0796E5;
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}
+
+/* ============================================================================
+   Mobile Navigation
+   ============================================================================ */
+
+.nav-links-mobile {
+  display: none;
+}
+
+/* ============================================================================
+   Responsive Design
+   ============================================================================ */
+@media (max-width: 1024px) {
+  .submission-dropdown {
+    padding: 24px 0;
+  }
+
+  .submission-header {
+    padding: 0 16px;
+  }
+
+  .submission-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 16px;
+  }
+
+  .submission-card {
+    padding: 24px 16px;
+  }
+
+  .submission-icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 16px;
+    flex-wrap: nowrap;
+  }
+
+  .nav-separator {
+    display: none;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-links-mobile {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-link {
+    display: flex;
+    gap: 6px;
+  }
+
+  .nav-link.active {
+    color: #000037;
+    background: transparent;
+  }
+
+  .nav-dropdown {
+    top: 0;
+    transform: translateX(-50%);
+    background: white;
+    border-radius: 0px;
+    box-shadow: 0px 1px 2px #00000014;
+    min-width: 216px;
+    padding: 8px 0;
+    border: none;
+  }
+
+  .nav-dropdown-item {
+    padding: 12px 24px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font: normal normal bold 18px/24px 'Proxima Nova';
+    letter-spacing: 0px;
+    color: #888FB0;
+    opacity: 1;
+  }
+
+  .nav-dropdown-item.dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .nav-dropdown-item:hover {
+    background: #f7fafc;
+    color: #000037;
+  }
+
+  .nav-dropdown-item.active {
+    color: #000037;
+    background: transparent;
+  }
+
+  .submission-dropdown {
+    top: 78px;
+    padding: 24px 0;
+  }
+
+  .submission-header {
+    padding: 0 16px;
+  }
+
+  .submission-grid {
+    grid-template-columns: 1fr;
+    padding: 0 16px;
+  }
+
+  .submission-card {
+    padding: 24px 16px;
+  }
+
+  .submission-icon {
+    width: 32px;
+    height: 32px;
+  }
+}

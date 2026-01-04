@@ -1,25 +1,6 @@
 <div class="dashboard-container">
   <!-- Navigation Bar -->
-  <nav class="navbar">
-    <div class="nav-left">
-      <div class="logo">
-        <span class="logo-icon">X</span>
-      </div>
-      <div class="nav-links">
-        <a class="nav-link active" (click)="navigateToOverview()">Overview</a>
-        <a class="nav-link" (click)="navigateToStats()">Employee Stats</a>
-        <a class="nav-link">Submission <span class="dropdown-arrow">▼</span></a>
-        <a class="nav-link">Task</a>
-        <a class="nav-link">Chat</a>
-        <a class="nav-link">Payroll</a>
-      </div>
-    </div>
-    <div class="nav-right">
-      <div class="profile-picture" (click)="logout()">
-        <img src="https://ui-avatars.com/api/?name=John+Doe&background=667eea&color=fff" alt="Profile" />
-      </div>
-    </div>
-  </nav>
+  <app-dashboard-navbar></app-dashboard-navbar>
 
   <!-- Main Content -->
   <div class="dashboard-content">
@@ -29,13 +10,25 @@
       <div class="summary-section">
         <div class="section-header">
           <h2 class="section-title">Summary</h2>
-          <div class="period-selector">
-            <input
-              type="month"
-              [(ngModel)]="selectedPeriod"
-              class="period-input"
-            />
-            <span class="calendar-icon">📅</span>
+          <div class="period-wrapper">
+            <label class="period-label">Periode</label>
+            <div class="period-selector">
+              <p-datepicker 
+                [(ngModel)]="selectedPeriod" 
+                view="month"
+                dateFormat="MM yy"
+                inputId="period-calendar"
+                [showIcon]="true"
+                size="small"
+                [iconDisplay]="'input'"
+                inputStyleClass="period-input"
+                panelStyleClass="period-calendar-panel"
+                (onSelect)="onPeriodChange($event)">
+                <ng-template #inputicon let-clickCallBack="clickCallBack">
+                  <img src="/dashboard/icon - Callendar.svg" alt="Callendar" class="callendar-icon-template" (click)="clickCallBack($event)" />
+                </ng-template>
+              </p-datepicker>
+            </div>
           </div>
         </div>
         <div class="summary-cards">
@@ -70,7 +63,8 @@
       <div class="tasks-section">
         <div class="section-header">
           <h2 class="section-title">Task Due Soon</h2>
-          <a class="see-all-link">See All <span>→</span></a>
+          <a class="see-all-link">See All <img src="/dashboard/icon - ChevronRight.svg" alt="Chevron Right"
+              class="chevron-icon" /></a>
         </div>
         <div class="tasks-list">
           <div class="task-item" *ngFor="let task of tasks">
@@ -80,15 +74,17 @@
             </div>
             <div class="task-meta">
               <div class="task-icons">
-                <span class="icon-attachment">📎 {{ task.attachments }}</span>
-                <span class="icon-comment">💬 {{ task.comments }}</span>
+                <span class="icon-attachment"><img src="/dashboard/icon - Attach.svg" alt="Attachment" class="attachment-icon" /> {{ task.attachments }}</span>
+                <span class="icon-comment"><img src="/dashboard/icon - Comments.svg" alt="Comment" class="comment-icon" /> {{ task.comments }}</span>
               </div>
-              <div class="task-badges">
-                <span class="priority-badge" [class]="'priority-' + task.priority.toLowerCase()">
-                  {{ task.priority }}
-                </span>
-                <span class="date-badge">📅 {{ task.dueDate }}</span>
-              </div>
+              <div class="task-separator"></div>
+              <span class="priority-badge" [class]="'priority-' + task.priority.toLowerCase()">
+                {{ task.priority }}
+              </span>
+              <span class="date-badge">
+                <img src="/dashboard/icon - CallendarSolid.svg" alt="Callendar Solid" class="date-icon" />
+                {{ task.dueDate }}
+              </span>
             </div>
           </div>
         </div>
@@ -98,31 +94,37 @@
     <!-- Right Panel - Employee Profile -->
     <div class="sidebar">
       <div class="employee-card">
-        <div class="employee-banner"></div>
+        <div class="employee-banner">
+          <img src="/dashboard/img-banner-profile.png" alt="Banner" class="banner-image" />
+        </div>
         <div class="employee-avatar">
-          <img src="https://ui-avatars.com/api/?name=John+Doe&background=667eea&color=fff&size=128" alt="John Doe" />
+          <img src="/dashboard/Profile Picture.png" alt="{{ user?.fullname || 'John Doe' }}" />
         </div>
         <div class="employee-info">
           <h3 class="employee-name">{{ user?.fullname || 'John Doe' }}</h3>
           <div class="employee-company">
-            <span>📄</span> {{ user?.companyName || 'Google Indonesia' }}
+            <div>
+              <img src="/dashboard/icon - building.svg" alt="company" />
+            </div>
+            <span class="company-name">{{ user?.companyName || 'Google Indonesia' }}</span>
           </div>
+          <div class="employee-separator"></div>
           <div class="employee-details">
             <div class="detail-item">
-              <span class="detail-label">Employee ID:</span>
-              <span class="detail-value">PT - GOO34</span>
+              <span class="detail-label">Employee ID</span>
+              <span class="detail-value">PT - GOO32</span>
             </div>
             <div class="detail-item">
-              <span class="detail-label">Position:</span>
+              <span class="detail-label">Position</span>
               <span class="detail-value">Senior Front-End Developer</span>
             </div>
             <div class="detail-item">
-              <span class="detail-label">Join Date:</span>
+              <span class="detail-label">Join Date</span>
               <span class="detail-value">23 Feb 2018</span>
             </div>
             <div class="detail-item">
-              <span class="detail-label">Years of Service:</span>
-              <span class="detail-value">4 Years 5 Months 2 Days</span>
+              <span class="detail-label">Years of Service</span>
+              <span class="detail-value">12 Years 5 Months 2 Days</span>
             </div>
           </div>
         </div>
@@ -130,12 +132,15 @@
 
       <div class="attendance-card">
         <h3 class="card-title">Today's Attendance</h3>
+        <div class="attendance-separator"></div>
         <div class="attendance-times">
           <div class="time-item clock-in">
+            <div class="time-color in"></div>
             <div class="time-label">Clock In</div>
             <div class="time-value">{{ attendanceData.clockIn }}</div>
           </div>
           <div class="time-item clock-out">
+            <div class="time-color out"></div>
             <div class="time-label">Clock Out</div>
             <div class="time-value">{{ attendanceData.clockOut }}</div>
           </div>
@@ -144,4 +149,3 @@
     </div>
   </div>
 </div>
-

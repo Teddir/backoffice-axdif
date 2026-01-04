@@ -107,6 +107,23 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.startAutoPlay();
+    this.submitted = false;
+    this.registrationForm.reset({
+      companyName: '',
+      fullname: '',
+      email: '',
+      countryCode: '',
+      phoneNumber: '',
+      password: '',
+      confirmPassword: '',
+      newsletter: false,
+      terms: false
+    });
+  
+    Object.values(this.registrationForm.controls).forEach(control => {
+      control.markAsPristine();
+      control.markAsUntouched();
+    });
 
     // If user is already logged in, redirect to dashboard
     if (this.authService.isLoggedIn()) {
@@ -166,9 +183,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.submitted = true;
     
     // Mark all fields as touched to show validation errors
-    Object.keys(this.registrationForm.controls).forEach(key => {
-      this.registrationForm.get(key)?.markAsTouched();
-    });
+    this.registrationForm.markAllAsTouched();
 
     if (this.registrationForm.valid) {
       const formValue = this.registrationForm.value;

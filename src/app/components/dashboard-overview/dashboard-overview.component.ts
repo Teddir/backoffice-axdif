@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { DatePickerModule } from 'primeng/datepicker';
+import { AuthService } from '../../services/auth.service';
+import { DashboardNavbarComponent } from '../dashboard-navbar/dashboard-navbar.component';
 
 interface Task {
   role: string;
@@ -16,18 +18,18 @@ interface Task {
 @Component({
   selector: 'app-dashboard-overview',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DatePickerModule, DashboardNavbarComponent],
   templateUrl: './dashboard-overview.component.html',
   styleUrl: './dashboard-overview.component.css'
 })
 export class DashboardOverviewComponent implements OnInit {
   user: any = null;
-  selectedPeriod: string = '2021-11'; // November 2021
+  selectedPeriod: Date = new Date(2021, 10, 1); // November 2021 (month is 0-indexed)
   tasks: Task[] = [
     {
       role: 'UI/UX Designer',
       title: '[Wms][Web][Task] Create Goals Design',
-      attachments: 44,
+      attachments: 33,
       comments: 1,
       priority: 'Medium',
       dueDate: '06 Aug 2021'
@@ -35,7 +37,7 @@ export class DashboardOverviewComponent implements OnInit {
     {
       role: 'UI/UX Designer',
       title: '[Wms][Chat] Improve Design',
-      attachments: 44,
+      attachments: 33,
       comments: 1,
       priority: 'Medium',
       dueDate: '06 Aug 2021'
@@ -43,7 +45,7 @@ export class DashboardOverviewComponent implements OnInit {
     {
       role: 'UI/UX Designer',
       title: '[Wms][Task] Improve Dashboard',
-      attachments: 44,
+      attachments: 33,
       comments: 1,
       priority: 'Medium',
       dueDate: '06 Aug 2021'
@@ -87,17 +89,11 @@ export class DashboardOverviewComponent implements OnInit {
     }
   }
 
-  navigateToStats() {
-    this.router.navigate(['/dashboard/employee-stats']);
-  }
-
-  navigateToOverview() {
-    this.router.navigate(['/dashboard/overview']);
-  }
-
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+  onPeriodChange(event: any): void {
+    // Ensure the selectedPeriod is updated when a month is selected
+    if (event && event instanceof Date) {
+      this.selectedPeriod = event;
+    }
   }
 }
 

@@ -40,6 +40,18 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.submitted = false;
+    this.loginForm.reset({
+      email: '',
+      password: '',
+      rememberMe: false
+    });
+  
+    Object.values(this.loginForm.controls).forEach(control => {
+      control.markAsPristine();
+      control.markAsUntouched();
+    });
+  
     // Redirect to dashboard if user is already logged in
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['/dashboard/overview']);
@@ -50,9 +62,7 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     
     // Mark all fields as touched to show validation errors
-    Object.keys(this.loginForm.controls).forEach(key => {
-      this.loginForm.get(key)?.markAsTouched();
-    });
+    this.loginForm.markAllAsTouched();
 
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
@@ -73,7 +83,7 @@ export class LoginComponent implements OnInit {
 
   hasFieldError(fieldName: string): boolean {
     const field = this.loginForm.get(fieldName);
-    return !!(field && field.invalid && (field.touched || this.submitted));
+    return !!(field && field.invalid && field.touched);
   }
 
   getFieldError(fieldName: string): string {
