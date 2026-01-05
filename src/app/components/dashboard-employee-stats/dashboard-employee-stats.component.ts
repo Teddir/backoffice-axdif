@@ -1,27 +1,24 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
-import { Chart, registerables } from 'chart.js';
-
-Chart.register(...registerables);
+import { ChartModule } from 'primeng/chart';
+import { DatePickerModule } from 'primeng/datepicker';
+import { DashboardNavbarComponent } from '../dashboard-navbar/dashboard-navbar.component';
+import { BadgeModule } from "primeng/badge";
 
 @Component({
   selector: 'app-dashboard-employee-stats',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DashboardNavbarComponent, ChartModule, DatePickerModule, BadgeModule],
   templateUrl: './dashboard-employee-stats.component.html',
   styleUrl: './dashboard-employee-stats.component.css'
 })
-export class DashboardEmployeeStatsComponent implements OnInit, AfterViewInit {
-  @ViewChild('attendanceChart') attendanceChartRef!: ElementRef<HTMLCanvasElement>;
-  @ViewChild('completenessChart') completenessChartRef!: ElementRef<HTMLCanvasElement>;
-  @ViewChild('taskProgressChart') taskProgressChartRef!: ElementRef<HTMLCanvasElement>;
-  @ViewChild('taskCompletionChart') taskCompletionChartRef!: ElementRef<HTMLCanvasElement>;
+export class DashboardEmployeeStatsComponent implements OnInit {
 
   user: any = null;
-  selectedPeriod: string = '2022'; // 2022
+  selectedPeriod: Date = new Date(2022, 0, 1); // January 2022
   displayMode: 'monthly' | 'yearly' = 'yearly';
 
   kpiData = {
@@ -31,186 +28,593 @@ export class DashboardEmployeeStatsComponent implements OnInit, AfterViewInit {
     totalLateComing: 0
   };
 
+  isMobile = false
+  chartWidth: number = 0;
+  // Attendance Summary Chart Data
+  attendanceChartData: any;
+  attendanceChartOptions: any;
+
+  // testing
+  attendanceChartOptions1: any;
+  attendanceChartOptions2: any;
+
+  // Attendance Completeness Chart Data
+  completenessChartData: any;
+  completenessChartOptions: any;
+
+  // Overall Task Progress Chart Data
+  progressChartData: any;
+  progressChartOptions: any;
+
+  // Task Completion Chart Data
+  taskCompletionChartData: any;
+  taskCompletionChartOptions: any;
+
+  // Task Completion KPI Data
+  taskKpiData = {
+    totalTaskCompleted: 2400,
+    totalTaskCompletedTrend: '20%',
+    totalTaskCompletedLastYear: 2000,
+    mostCompletedTasksAt: 185,
+    mostCompletedTasksAtMonth: 'May 2022',
+    totalTaskCreated: 1600,
+    totalTaskCreatedTrend: '20%',
+    totalTaskCreatedLastYear: 1800,
+    mostCompletedTaskType: 'UI/UX Design',
+    mostCompletedTaskTypeCount: 240
+  };
+
+  // Leave Recap Data
+  leaveRecapData: any[] = [
+    {
+      leaveCode: 'LV-PTES-PT-CV10435-01-23-001',
+      requestedOn: 'Mon, 02 Jan 2023',
+      leaveType: 'Annual Leave',
+      startDate: 'Tue, 03 Jan 2023',
+      endDate: 'Tue, 03 Jan 2023',
+      duration: '1 Day(s)',
+      day: 'Half Day - First Half',
+      status: 'Approve',
+      reason: 'Personal Reason'
+    },
+    {
+      leaveCode: 'LV-PTES-PT-CV10435-01-23-001',
+      requestedOn: 'Mon, 09 Jan 2023',
+      leaveType: 'Compassionate Leave (Imm. Family)',
+      startDate: 'Tue, 10 Jan 2023',
+      endDate: 'Wed, 11 Jan 2023',
+      duration: '2 Day(s)',
+      day: 'Full',
+      status: 'Approve',
+      reason: 'Personal Reason'
+    },
+    {
+      leaveCode: 'LV-PTES-PT-CV10435-01-23-001',
+      requestedOn: 'Mon, 16 Jan 2023',
+      leaveType: 'Annual Leave',
+      startDate: 'Tue, 24 Jan 2023',
+      endDate: 'Tue, 24 Jan 2023',
+      duration: '0.5 Day(s)',
+      day: 'Half Day - Second Half',
+      status: 'Approve',
+      reason: 'Personal Reason'
+    },
+    {
+      leaveCode: 'LV-PTES-PT-CV10435-01-23-001',
+      requestedOn: 'Mon, 23 Jan 2023',
+      leaveType: 'Annual Leave',
+      startDate: 'Fri, 27 Jan 2023',
+      endDate: 'Fri, 27 Jan 2023',
+      duration: '0.5 Day(s)',
+      day: 'Half Day - First Half',
+      status: 'Approve',
+      reason: 'Personal Reason'
+    },
+    {
+      leaveCode: 'LV-PTES-PT-CV10435-01-23-001',
+      requestedOn: 'Mon, 30 Jan 2023',
+      leaveType: 'Sick Leave',
+      startDate: 'Mon, 30 Jan 2023',
+      endDate: 'Wed, 01 Feb 2023',
+      duration: '3 Day(s)',
+      day: 'Full',
+      status: 'Approve',
+      reason: 'Personal Reason'
+    },
+    {
+      leaveCode: 'LV-PTES-PT-CV10435-01-23-001',
+      requestedOn: 'Mon, 30 Jan 2023',
+      leaveType: 'Sick Leave',
+      startDate: 'Mon, 30 Jan 2023',
+      endDate: 'Wed, 01 Feb 2023',
+      duration: '3 Day(s)',
+      day: 'Half Day - Second Half',
+      status: 'Approve',
+      reason: 'Personal Reason'
+    },
+    {
+      leaveCode: 'LV-PTES-PT-CV10435-01-23-001',
+      requestedOn: 'Mon, 30 Jan 2023',
+      leaveType: 'Sick Leave',
+      startDate: 'Mon, 30 Jan 2023',
+      endDate: 'Wed, 01 Feb 2023',
+      duration: '3 Day(s)',
+      day: 'Half Day - First Half',
+      status: 'Approve',
+      reason: 'Personal Reason'
+    },
+    {
+      leaveCode: 'LV-PTES-PT-CV10435-01-23-001',
+      requestedOn: 'Mon, 30 Jan 2023',
+      leaveType: 'Sick Leave',
+      startDate: 'Mon, 30 Jan 2023',
+      endDate: 'Wed, 01 Feb 2023',
+      duration: '3 Day(s)',
+      day: 'Half Day - Second Half',
+      status: 'Approve',
+      reason: 'Personal Reason'
+    },
+    {
+      leaveCode: 'LV-PTES-PT-CV10435-01-23-001',
+      requestedOn: 'Mon, 30 Jan 2023',
+      leaveType: 'Sick Leave',
+      startDate: 'Mon, 30 Jan 2023',
+      endDate: 'Wed, 01 Feb 2023',
+      duration: '3 Day(s)',
+      day: 'Full',
+      status: 'Approve',
+      reason: 'Personal Reason'
+    },
+    {
+      leaveCode: 'LV-PTES-PT-CV10435-01-23-001',
+      requestedOn: 'Mon, 30 Jan 2023',
+      leaveType: 'Sick Leave',
+      startDate: 'Mon, 30 Jan 2023',
+      endDate: 'Wed, 01 Feb 2023',
+      duration: '3 Day(s)',
+      day: 'Full',
+      status: 'Approve',
+      reason: 'Personal Reason'
+    }
+  ];
+
+  sortField: string = '';
+  sortOrder: 'asc' | 'desc' = 'asc';
+
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
+
     if (!this.authService.isLoggedIn()) {
       this.router.navigate(['/login']);
       return;
     }
+    this.isMobile = window.innerWidth <= 768;
     this.user = this.authService.getCurrentUser();
+    this.initCharts();
   }
 
-  ngAfterViewInit() {
-    this.createAttendanceChart();
-    this.createCompletenessChart();
-    this.createTaskProgressChart();
-    this.createTaskCompletionChart();
-  }
+  initCharts() {
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColorSecondary = '#809FB8';
+    const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
+    const pixelsPerLabel = 80;
+    const barWidth = 80;
 
-  createAttendanceChart() {
-    const ctx = this.attendanceChartRef.nativeElement.getContext('2d');
-    if (!ctx) return;
+    // Attendance Summary Chart
+    this.attendanceChartData = {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      // labels: ['Mon', 'Tue', 'Wed', 'Thu'],
+      datasets: [
+        {
+          label: 'My First dataset',
+          barThickness: 18,
+          borderRadius: { topLeft: 4, topRight: 4, bottomLeft: 0, bottomRight: 0 },
+          backgroundColor: '#E53935',
+          borderColor: '#E53935',
+          data: [15, 1, 19, 7, 4, 13, 10, 18, 15, 10, 5, 1]
+        },
+        {
+          label: 'My Second dataset',
+          barThickness: 18,
+          borderRadius: { topLeft: 4, topRight: 4, bottomLeft: 0, bottomRight: 0 },
+          backgroundColor: '#0796E5',
+          borderColor: '#e2e8f0',
+          data: [28, 24, 26, 19, 29, 27, 21, 10, 20, 18, 22, 25]
+        }
+      ]
+    };
 
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        datasets: [
-          {
-            label: 'Present',
-            data: [22, 20, 25, 18, 20, 7, 7, 21, 19, 23, 27, 24],
-            backgroundColor: '#667eea'
-          },
-          {
-            label: 'Absent',
-            data: [2, 1, 1, 2, 1, 0, 0, 1, 2, 1, 1, 1],
-            backgroundColor: '#e53e3e'
-          }
-        ]
+    const labelsCount = this.attendanceChartData.labels.length;
+    this.chartWidth = labelsCount * barWidth;
+
+    const barlength = this.attendanceChartData.datasets[0].data.length;
+    if (barlength > 7) {
+      const nil = 1000 + ((barlength - 7) * 10);
+      this.chartWidth = nil
+    }
+
+    this.attendanceChartOptions = {
+      maintainAspectRatio: false,
+      aspectRatio: 1.2,
+      plugins: {
+        legend: {
+          display: false
+        }
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false
+      scales: {
+        x: {
+          ticks: {
+            color: textColorSecondary,
+            font: {
+              weight: 300,
+              size: 10,
+              family: 'Open Sans',
+            }
+          },
+          grid: {
+            color: surfaceBorder,
+            drawTicks: true,
+            drawBorder: true,
+            borderColor: '#809FB8',
+            borderWidth: 2,
           }
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 30,
-            ticks: {
-              stepSize: 5
+        y: {
+          ticks: {
+            color: textColorSecondary,
+            font: {
+              weight: 300,
+              size: 10,
+              family: 'Open Sans',
             }
-          }
-        }
-      }
-    });
-  }
-
-  createCompletenessChart() {
-    const ctx = this.completenessChartRef.nativeElement.getContext('2d');
-    if (!ctx) return;
-
-    new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: ['Complete', 'Not Complete'],
-        datasets: [{
-          data: [50, 50],
-          backgroundColor: ['#667eea', '#e53e3e']
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'bottom',
-            labels: {
-              usePointStyle: true,
-              padding: 15
-            }
-          }
-        }
-      }
-    });
-  }
-
-  createTaskProgressChart() {
-    const ctx = this.taskProgressChartRef.nativeElement.getContext('2d');
-    if (!ctx) return;
-
-    new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Complete', 'In Progress'],
-        datasets: [{
-          data: [80, 20],
-          backgroundColor: ['#667eea', '#e2e8f0']
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false
-          }
-        }
-      }
-    });
-  }
-
-  createTaskCompletionChart() {
-    const ctx = this.taskCompletionChartRef.nativeElement.getContext('2d');
-    if (!ctx) return;
-
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        datasets: [
-          {
-            label: 'Complete',
-            data: [120, 150, 180, 160, 200, 175, 190, 210, 195, 220, 200, 180],
-            borderColor: '#667eea',
-            backgroundColor: 'rgba(102, 126, 234, 0.1)',
-            fill: true,
-            tension: 0.4
           },
-          {
-            label: 'Created Task',
-            data: [80, 100, 120, 110, 130, 125, 140, 150, 145, 160, 150, 140],
-            borderColor: '#f97316',
-            backgroundColor: 'rgba(249, 115, 22, 0.1)',
-            fill: true,
-            tension: 0.4
-          }
-        ]
+          grid: {
+            color: surfaceBorder,
+            borderColor: '#809FB8',
+            borderWidth: 2,
+            drawBorder: true
+          },
+        }
+      }
+    };
+
+    // testing
+    this.attendanceChartOptions1 = {
+      responsive: false,          // 🔴 REQUIRED
+      maintainAspectRatio: false, // 🔴 REQUIRED
+      aspectRatio: 0.9,
+      plugins: {
+        legend: {
+          display: false
+        }
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'bottom',
-            labels: {
-              usePointStyle: true,
-              padding: 15
+      layout: {
+        padding: {
+          bottom: 25.5,
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            display: false,
+          },
+          grid: {
+            drawTicks: false,
+          }
+        },
+        y: {
+          ticks: {
+            color: textColorSecondary,
+            font: {
+              weight: 300,
+              size: 10,
+              family: 'Open Sans',
+            }
+          },
+          beginAtZero: true,
+          afterFit: (ctx: any) => {
+            ctx.width = 28.5;
+          }
+        }
+      }
+    };
+
+    this.attendanceChartOptions2 = {
+      responsive: false,          // 🔴 REQUIRED
+      maintainAspectRatio: false, // 🔴 REQUIRED
+      aspectRatio: 0.9,
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+
+      layout: {
+        padding: {
+          top: 9.5,
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: textColorSecondary,
+            font: {
+              weight: 300,
+              size: 10,
+              family: 'Open Sans',
+            }
+          },
+          grid: {
+            color: surfaceBorder,
+            drawTicks: true,
+            drawBorder: true,
+            borderColor: '#809FB8',
+            borderWidth: 2,
+          }
+        },
+        y: {
+          beginAtZero: true,
+          ticks: {
+            display: false,
+            color: textColorSecondary,
+            font: {
+              weight: 300,
+              size: 10,
+              family: 'Open Sans',
+            }
+          },
+          grid: {
+            color: surfaceBorder,
+            borderColor: '#809FB8',
+            borderWidth: 2,
+            drawBorder: false,
+            drawTicks: false,
+          },
+        }
+      }
+    };
+
+    // Attendance Completeness Chart
+    this.completenessChartData = {
+      // urutan dibalik agar legend sesuai warna
+      labels: ['Not Complete', 'Complete'], // urutan legend sekarang sesuai warna
+      datasets: [{
+        data: [50, 50],
+        backgroundColor: ['#E53935', '#0796E5'] // urutan warna tetap sama
+      }]
+    };
+
+    this.completenessChartOptions = {
+      responsive: true,
+      aspectRatio: this.isMobile ? 1 : 0.8,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            padding: 24,
+            font: {
+              size: 12, weight: 300, family: 'Open Sans', textDecoration: 'none'
+            },
+            // sort: (a: any, b: any) => {
+            //   return b.index - a.index;
+            // },
+            generateLabels: (chart: any) => {
+              const total = chart.data.labels.length;
+              const labels = chart.data.labels.slice().reverse();
+
+              return labels.map((label: string, i: number) => {
+                const originalIndex = total - 1 - i;
+                const isVisible = chart.getDataVisibility(originalIndex);
+
+                return {
+                  text: label,
+                  fillStyle: label === 'Complete' ? '#0796E5' : '#E53935',
+                  strokeStyle: 'transparent',
+                  borderRadius: 2,
+                  index: originalIndex,
+                  hidden: !isVisible
+                };
+              });
+            },
+            onClick: (e: any, legendItem: any, legend: any) => {
+              const chart = legend.chart;
+              // toggle visibility slice
+              chart.toggleDataVisibility(legendItem.index);
+              chart.update();
             }
           }
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 250
+        tooltip: {
+          enabled: true
+        }
+      },
+    };
+
+    // Overall Task Progress Chart
+    this.progressChartData = {
+      // urutan dibalik agar legend sesuai warna
+      labels: ['Unscheduled', 'Overdue', 'Complete'], // urutan legend sekarang sesuai warna
+      datasets: [{
+        data: [25, 25, 50],
+        backgroundColor: ['#D4DFE7', '#FF9800', '#0796E5'] // urutan warna tetap sama
+      }]
+    };
+
+    this.progressChartOptions = {
+      responsive: true,
+      aspectRatio: this.isMobile ? 0.9 : 0.8,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            padding: 24,
+            font: {
+              size: 12, weight: 300, family: 'Open Sans', textDecoration: 'none'
+            },
+            generateLabels: (chart: any) => {
+              const total = chart.data.labels.length;
+              const labels = chart.data.labels.slice().reverse();
+
+              return labels.map((label: string, i: number) => {
+                const originalIndex = total - 1 - i;
+                const isVisible = chart.getDataVisibility(originalIndex);
+
+                return {
+                  text: label,
+                  fillStyle:
+                    label === 'Complete' ? '#0796E5' :
+                      label === 'Overdue' ? '#FF9800' : '#D4DFE7',
+                  strokeStyle: 'transparent',
+                  borderRadius: 2,
+                  index: originalIndex,
+                  hidden: !isVisible
+                };
+              });
+            },
+            onClick: (e: any, legendItem: any, legend: any) => {
+              const chart = legend.chart;
+              chart.toggleDataVisibility(legendItem.index);
+              chart.update();
+            }
+          }
+        },
+        tooltip: {
+          enabled: true
+        }
+      },
+    };
+
+    // Task Completion Chart
+    this.taskCompletionChartData = {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      datasets: [
+        {
+          label: 'Complete',
+          data: [20, 120, 80, 100, 170, 70, 50, 100, 140, 80, 170, 120],
+          borderColor: '#0796E5',
+          backgroundColor: '#0796E526',
+          fill: true,
+          tension: 0.4,
+          pointBorderColor: '#08539A',
+          pointBackgroundColor: '#E1F4FE',
+        },
+        {
+          label: 'Created Task',
+          data: [10, 60, 100, 80, 120, 100, 150, 70, 110, 140, 50, 100],
+          borderColor: '#FF9800',
+          backgroundColor: '#FF980026',
+          fill: true,
+          tension: 0.4,
+          pointBorderColor: '#AA6B15',
+          pointBackgroundColor: '#FFECD0',
+        }
+      ]
+    };
+
+    this.taskCompletionChartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      aspectRatio: 1.2,
+      borderWidth: 2,
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: textColorSecondary,
+            font: {
+              weight: 300,
+              size: 10,
+              family: 'Open Sans',
+            }
+          },
+          grid: {
+            color: surfaceBorder,
+            drawTicks: true,
+            drawBorder: true,
+            borderColor: surfaceBorder,
+            borderWidth: 2,
+          }
+        },
+        y: {
+          min: 0,
+          ticks: {
+            stepSize: 50,
+            color: textColorSecondary,
+            font: {
+              weight: 300,
+              size: 10,
+              family: 'Open Sans',
+            },
+            callback: (value: any) => value // opsional, bisa dihapus
+          },
+          grid: {
+            color: surfaceBorder
           }
         }
-      }
-    });
+      },
+    };
   }
 
   toggleDisplayMode(mode: 'monthly' | 'yearly') {
     this.displayMode = mode;
   }
 
-  navigateToStats() {
-    this.router.navigate(['/dashboard/employee-stats']);
+  onPeriodChange(event: any): void {
+    if (event && event instanceof Date) {
+      this.selectedPeriod = event;
+    }
   }
 
-  navigateToOverview() {
-    this.router.navigate(['/dashboard/overview']);
+  get datePickerView(): 'year' | 'month' {
+    return this.displayMode === 'yearly' ? 'year' : 'month';
   }
 
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+  getDatePickerFormat(): string {
+    return this.displayMode === 'yearly' ? 'yy' : 'MM yy';
+  }
+
+  sortTable(field: string): void {
+    if (this.sortField === field) {
+      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortField = field;
+      this.sortOrder = 'asc';
+    }
+
+    this.leaveRecapData.sort((a, b) => {
+      let aValue = a[field];
+      let bValue = b[field];
+
+      // Handle date strings
+      if (field === 'requestedOn' || field === 'startDate' || field === 'endDate') {
+        aValue = new Date(aValue).getTime();
+        bValue = new Date(bValue).getTime();
+      }
+
+      // Handle duration strings (extract number)
+      if (field === 'duration') {
+        aValue = parseFloat(aValue);
+        bValue = parseFloat(bValue);
+      }
+
+      if (aValue < bValue) {
+        return this.sortOrder === 'asc' ? -1 : 1;
+      }
+      if (aValue > bValue) {
+        return this.sortOrder === 'asc' ? 1 : -1;
+      }
+      return 0;
+    });
   }
 }
 
