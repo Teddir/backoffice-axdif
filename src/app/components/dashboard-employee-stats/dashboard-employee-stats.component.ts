@@ -28,15 +28,14 @@ export class DashboardEmployeeStatsComponent implements OnInit {
     totalLateComing: 0
   };
 
-  isMobile = false
+  isMobile = false;
   chartWidth: number = 0;
+
   // Attendance Summary Chart Data
   attendanceChartData: any;
   attendanceChartOptions: any;
-
-  // testing
-  attendanceChartOptions1: any;
-  attendanceChartOptions2: any;
+  attendanceChartOptions1: any; // Mobile: Y-axis only
+  attendanceChartOptions2: any; // Mobile: Chart data only
 
   // Attendance Completeness Chart Data
   completenessChartData: any;
@@ -49,11 +48,9 @@ export class DashboardEmployeeStatsComponent implements OnInit {
   // Task Completion Chart Data
   taskCompletionChartData: any;
   taskCompletionChartOptions: any;
-
-  // testing
-  taskCompletionChartData1: any;
-  taskCompletionChartOptions1: any;
-  taskCompletionChartOptions2: any;
+  taskCompletionChartData1: any; // Mobile: Y-axis only
+  taskCompletionChartOptions1: any; // Mobile: Y-axis only
+  taskCompletionChartOptions2: any; // Mobile: Chart data only
 
   // Task Completion KPI Data
   taskKpiData = {
@@ -211,7 +208,6 @@ export class DashboardEmployeeStatsComponent implements OnInit {
     // Attendance Summary Chart
     this.attendanceChartData = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      // labels: ['Mon', 'Tue', 'Wed', 'Thu'],
       datasets: [
         {
           label: 'My First dataset',
@@ -232,13 +228,13 @@ export class DashboardEmployeeStatsComponent implements OnInit {
       ]
     };
 
+    // Calculate chart width for horizontal scrolling
     const labelsCount = this.attendanceChartData.labels.length;
     this.chartWidth = labelsCount * barWidth;
 
-    const barlength = this.attendanceChartData.datasets[0].data.length;
-    if (barlength > 7) {
-      const nil = 1000 + ((barlength - 7) * 10);
-      this.chartWidth = nil
+    const barLength = this.attendanceChartData.datasets[0].data.length;
+    if (barLength > 7) {
+      this.chartWidth = 1000 + ((barLength - 7) * 10);
     }
 
     this.attendanceChartOptions = {
@@ -251,6 +247,10 @@ export class DashboardEmployeeStatsComponent implements OnInit {
       },
       scales: {
         x: {
+          border: {
+            color: textColorSecondary,
+            width: 2,
+          },
           ticks: {
             color: textColorSecondary,
             font: {
@@ -263,11 +263,13 @@ export class DashboardEmployeeStatsComponent implements OnInit {
             color: surfaceBorder,
             drawTicks: true,
             drawBorder: true,
-            borderColor: '#809FB8',
-            borderWidth: 2,
           }
         },
         y: {
+          border: {
+            color: textColorSecondary,
+            width: 2,
+          },
           ticks: {
             color: textColorSecondary,
             font: {
@@ -278,18 +280,15 @@ export class DashboardEmployeeStatsComponent implements OnInit {
           },
           grid: {
             color: surfaceBorder,
-            borderColor: '#809FB8',
-            borderWidth: 2,
-            drawBorder: true
           },
         }
       }
     };
 
-    // testing
+    // Mobile: Y-axis only chart
     this.attendanceChartOptions1 = {
-      responsive: false,          // 🔴 REQUIRED
-      maintainAspectRatio: false, // 🔴 REQUIRED
+      responsive: false,
+      maintainAspectRatio: false,
       aspectRatio: 0.9,
       plugins: {
         legend: {
@@ -303,6 +302,10 @@ export class DashboardEmployeeStatsComponent implements OnInit {
       },
       scales: {
         x: {
+          border: {
+            color: textColorSecondary,
+            width: 2,
+          },
           ticks: {
             display: false,
           },
@@ -311,6 +314,10 @@ export class DashboardEmployeeStatsComponent implements OnInit {
           }
         },
         y: {
+          border: {
+            color: textColorSecondary,
+            width: 2,
+          },
           ticks: {
             color: textColorSecondary,
             font: {
@@ -327,9 +334,10 @@ export class DashboardEmployeeStatsComponent implements OnInit {
       }
     };
 
+    // Mobile: Chart data only (no Y-axis)
     this.attendanceChartOptions2 = {
-      responsive: false,          // 🔴 REQUIRED
-      maintainAspectRatio: false, // 🔴 REQUIRED
+      responsive: false,
+      maintainAspectRatio: false,
       aspectRatio: 0.9,
       plugins: {
         legend: {
@@ -344,6 +352,10 @@ export class DashboardEmployeeStatsComponent implements OnInit {
       },
       scales: {
         x: {
+          border: {
+            color: textColorSecondary,
+            width: 2,
+          },
           ticks: {
             color: textColorSecondary,
             font: {
@@ -355,11 +367,13 @@ export class DashboardEmployeeStatsComponent implements OnInit {
           grid: {
             color: surfaceBorder,
             drawTicks: true,
-            drawBorder: true,
-            borderWidth: 2,
           }
         },
         y: {
+          border: {
+            color: textColorSecondary,
+            width: 2,
+          },
           beginAtZero: true,
           ticks: {
             display: false,
@@ -375,11 +389,10 @@ export class DashboardEmployeeStatsComponent implements OnInit {
 
     // Attendance Completeness Chart
     this.completenessChartData = {
-      // urutan dibalik agar legend sesuai warna
-      labels: ['Not Complete', 'Complete'], // urutan legend sekarang sesuai warna
+      labels: ['Not Complete', 'Complete'],
       datasets: [{
         data: [50, 50],
-        backgroundColor: ['#E53935', '#0796E5'] // urutan warna tetap sama
+        backgroundColor: ['#E53935', '#0796E5']
       }]
     };
 
@@ -432,11 +445,10 @@ export class DashboardEmployeeStatsComponent implements OnInit {
 
     // Overall Task Progress Chart
     this.progressChartData = {
-      // urutan dibalik agar legend sesuai warna
-      labels: ['Unscheduled', 'Overdue', 'Complete'], // urutan legend sekarang sesuai warna
+      labels: ['Unscheduled', 'Overdue', 'Complete'],
       datasets: [{
         data: [25, 25, 50],
-        backgroundColor: ['#D4DFE7', '#FF9800', '#0796E5'] // urutan warna tetap sama
+        backgroundColor: ['#D4DFE7', '#FF9800', '#0796E5']
       }]
     };
 
@@ -491,7 +503,7 @@ export class DashboardEmployeeStatsComponent implements OnInit {
       datasets: [
         {
           label: 'Complete',
-          data: [20, 120, 80, 100, 170, 70, 50, 100, 140, 80, 170, 120],
+          data: [50, 120, 80, 100, 100, 70, 50, 100, 40, 80, 70, 120],
           borderColor: '#0796E5',
           backgroundColor: '#0796E526',
           fill: true,
@@ -501,7 +513,7 @@ export class DashboardEmployeeStatsComponent implements OnInit {
         },
         {
           label: 'Created Task',
-          data: [10, 60, 100, 80, 120, 100, 150, 70, 110, 140, 50, 100],
+          data: [25, 60, 100, 80, 120, 100, 145, 70, 110, 140, 50, 100],
           borderColor: '#FF9800',
           backgroundColor: '#FF980026',
           fill: true,
@@ -512,11 +524,16 @@ export class DashboardEmployeeStatsComponent implements OnInit {
       ]
     };
 
+    this.taskCompletionChartData.labels.unshift('');
+    this.taskCompletionChartData.datasets[0].data.unshift(0);
+    this.taskCompletionChartData.datasets[0].data.push(0);
+    this.taskCompletionChartData.datasets[1].data.unshift(0);
+    this.taskCompletionChartData.datasets[1].data.push(0);
+
     this.taskCompletionChartOptions = {
       responsive: true,
       maintainAspectRatio: false,
       aspectRatio: 1.2,
-      borderWidth: 2,
       plugins: {
         legend: {
           display: false
@@ -524,6 +541,10 @@ export class DashboardEmployeeStatsComponent implements OnInit {
       },
       scales: {
         x: {
+          border: {
+            color: textColorSecondary,
+            width: 2,
+          },
           ticks: {
             color: textColorSecondary,
             font: {
@@ -535,12 +556,13 @@ export class DashboardEmployeeStatsComponent implements OnInit {
           grid: {
             color: surfaceBorder,
             drawTicks: true,
-            drawBorder: true,
-            borderColor: surfaceBorder,
-            borderWidth: 2,
           }
         },
         y: {
+          border: {
+            color: textColorSecondary,
+            width: 2,
+          },
           min: 0,
           ticks: {
             stepSize: 50,
@@ -550,7 +572,7 @@ export class DashboardEmployeeStatsComponent implements OnInit {
               size: 10,
               family: 'Open Sans',
             },
-            callback: (value: any) => value // opsional, bisa dihapus
+            callback: (value: any) => value
           },
           grid: {
             color: surfaceBorder
@@ -560,22 +582,22 @@ export class DashboardEmployeeStatsComponent implements OnInit {
     };
 
     this.taskCompletionChartData1 = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      labels: this.taskCompletionChartData.labels,
       datasets: [
         {
-          label: 'Complete',
-          data: [20, 120, 80, 100, 170, 70, 50, 100, 140, 80, 170, 120],
+          label: this.taskCompletionChartData.datasets[0].label,
+          data: this.taskCompletionChartData.datasets[0].data,
         },
         {
-          label: 'Created Task',
-          data: [10, 60, 100, 80, 120, 100, 150, 70, 110, 140, 50, 100],
+          label: this.taskCompletionChartData.datasets[1].label,
+          data: this.taskCompletionChartData.datasets[1].data,
         }
       ]
     };
-    // testing
+    // Mobile: Y-axis only chart
     this.taskCompletionChartOptions1 = {
-      responsive: false,          // 🔴 REQUIRED
-      maintainAspectRatio: false, // 🔴 REQUIRED
+      responsive: false,
+      maintainAspectRatio: false,
       aspectRatio: 0.9,
       plugins: {
         legend: {
@@ -587,12 +609,16 @@ export class DashboardEmployeeStatsComponent implements OnInit {
           bottom: 25.5,
         }
       },
-      showLine:false,
-      pointBorderWidth:0,
+      showLine: false,
+      pointBorderWidth: 0,
       pointBackgroundColor: 'transparent',
       pointBorderColor: 'transparent',
       scales: {
         x: {
+          border: {
+            color: textColorSecondary,
+            width: 2,
+          },
           ticks: {
             display: false,
           },
@@ -601,6 +627,10 @@ export class DashboardEmployeeStatsComponent implements OnInit {
           },
         },
         y: {
+          border: {
+            color: textColorSecondary,
+            width: 2,
+          },
           ticks: {
             color: textColorSecondary,
             font: {
@@ -611,15 +641,16 @@ export class DashboardEmployeeStatsComponent implements OnInit {
           },
           beginAtZero: true,
           afterFit: (ctx: any) => {
-            ctx.width = 25.5;
+            ctx.width = 24.5;
           }
         }
       }
     };
 
+    // Mobile: Chart data only (no Y-axis)
     this.taskCompletionChartOptions2 = {
-      responsive: false,          // 🔴 REQUIRED
-      maintainAspectRatio: false, // 🔴 REQUIRED
+      responsive: false,
+      maintainAspectRatio: false,
       aspectRatio: 0.9,
       plugins: {
         legend: {
@@ -633,6 +664,10 @@ export class DashboardEmployeeStatsComponent implements OnInit {
       },
       scales: {
         x: {
+          border: {
+            color: textColorSecondary,
+            width: 2,
+          },
           ticks: {
             color: textColorSecondary,
             font: {
@@ -644,11 +679,13 @@ export class DashboardEmployeeStatsComponent implements OnInit {
           grid: {
             color: surfaceBorder,
             drawTicks: true,
-            drawBorder: true,
-            borderWidth: 2,
           },
         },
         y: {
+          border: {
+            color: textColorSecondary,
+            width: 2,
+          },
           beginAtZero: true,
           ticks: {
             display: false,

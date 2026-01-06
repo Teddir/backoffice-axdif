@@ -106,12 +106,11 @@
             <div class="chart-card-other">
               <h3 class="chart-title">Attendance Summary</h3>
               <div class="chart-container">
-                <!-- <p-chart type="bar" [data]="attendanceChartData" [options]="attendanceChartOptions"></p-chart> -->
-                <div class="colSmall w-[28.5px]">
+                <div class="chart-y-axis-fixed">
                   <p-chart type="bar" [data]="attendanceChartData" [options]="attendanceChartOptions1"></p-chart>
                 </div>
-                <div class="colLarge max-w-[300px] overflow-x-scroll">
-                  <div class="box" [style.width.px]="chartWidth">
+                <div class="chart-scrollable-area">
+                  <div class="chart-scrollable-content" [style.width.px]="chartWidth">
                     <p-chart type="bar" [data]="attendanceChartData" [options]="attendanceChartOptions2"></p-chart>
                   </div>
                 </div>
@@ -313,18 +312,15 @@
               </div>
 
               <div class="chart-container">
-                <!-- <p-chart type="bar" [data]="attendanceChartData" [options]="attendanceChartOptions"></p-chart> -->
-                <div class="colSmall w-[25.5px] absolute bg-white z-1">
+                <div class="chart-y-axis-fixed chart-y-axis-line">
                   <p-chart type="line" [data]="taskCompletionChartData1" [options]="taskCompletionChartOptions1"></p-chart>
                 </div>
-                <div class="colLarge max-w-[325px] overflow-x-scroll ml-1.5">
-                  <div class="box" [style.width.px]="chartWidth">
+                <div class="chart-scrollable-area chart-scrollable-line">
+                  <div class="chart-scrollable-content abso" [style.width.px]="chartWidth">
                     <p-chart type="line" [data]="taskCompletionChartData" [options]="taskCompletionChartOptions2"></p-chart>
                   </div>
                 </div>
               </div>
-
-              <!-- KPI -->
 
               <!-- KPI Cards -->
               <div class="kpi-cards-1">

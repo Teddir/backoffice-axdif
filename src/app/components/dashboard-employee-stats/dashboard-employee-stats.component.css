@@ -209,6 +209,8 @@
 
 .chart-container {
   position: relative;
+  /* display: flex;
+  align-items: flex-start; */
 }
 
 .chart-title-container {
@@ -423,23 +425,57 @@
   opacity: 1;
 }
 
-.kpi-context {
-  font-size: 0.75rem;
-  color: #718096;
-  margin-top: 0.25rem;
+
+/* Chart with Fixed Y-Axis - Mobile View */
+.chart-y-axis-fixed {
+  width: 28.5px;
+  flex-shrink: 0;
 }
 
-.chart-scroll-wrapper {
-  width: 100%;
-  overflow-x: auto;
+.chart-y-axis-line {
+  width: 26px;
+  position: absolute;
+  background: white;
+  z-index: 1;
+}
+
+.chart-scrollable-area {
+  max-width: 300px;
+  overflow-x: scroll;
   overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e0 #f7fafc;
 }
 
-.attendance-chart {
-  width: 1200px;
-  /* force scroll */
-  height: 300px;
-  display: block;
+.chart-scrollable-line {
+  max-width: 325px;
+}
+
+.chart-scrollable-area::-webkit-scrollbar {
+  height: 8px;
+}
+
+.chart-scrollable-area::-webkit-scrollbar-track {
+  background: #f7fafc;
+  border-radius: 4px;
+}
+
+.chart-scrollable-area::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 4px;
+}
+
+.chart-scrollable-area::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+
+.chart-scrollable-content {
+  position: relative;
+}
+
+.chart-scrollable-content.abso {
+  margin-left: 1.2rem;
 }
 
 /* Responsive Design */
@@ -672,6 +708,7 @@
 
   .chart-container {
     display: flex;
+    align-items: flex-start;
   }
 
   .chart-card {
