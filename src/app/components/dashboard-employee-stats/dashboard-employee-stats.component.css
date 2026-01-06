@@ -471,6 +471,38 @@
   .kpi-content-wrapper {
     padding: 14px;
   }
+
+  .chart-title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+
+
+  .kpi-cards-1 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .kpi-card-1 {
+    border-bottom: 1px solid #C6D4DF;
+  }
+
+  .kpi-card-1:nth-child(2n) {
+    border-right: none;
+  }
+
+  .kpi-card-1:last-child,
+  .kpi-card-1:nth-child(3n) {
+    border-bottom: none;
+  }
+
+  .kpi-header-1 {
+    position: relative;
+  }
+
+
 }
 
 /* Leave Recap Table Styles */
@@ -594,6 +626,10 @@
     padding: 1rem;
   }
 
+  .chart-card-other .legend-container {
+    padding: 0rem 0px 0rem 1rem;
+  }
+
   .stats-header {
     flex-direction: column;
     align-items: flex-start;
@@ -668,39 +704,10 @@
     font: normal normal bold 15px/18px 'Open Sans';
   }
 
-  .chart-title-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 0.5rem;
-  }
-
-  .legend-item-color {
-    width: 24px;
-    height: 12px;
-  }
-
   .kpi-cards-1 {
-    grid-template-columns: repeat(2, 1fr);
+    margin: 0rem 1rem 1rem 1rem;
   }
-
-  .kpi-card-1 {
-    border-bottom: 1px solid #C6D4DF;
-  }
-
-  .kpi-card-1:nth-child(2n) {
-    border-right: none;
-  }
-
-  .kpi-card-1:last-child,
-  .kpi-card-1:nth-child(3n) {
-    border-bottom: none;
-  }
-
-  .kpi-header-1 {
-    position: relative;
-  }
+  
 
   .kpi-label-1 {
     font: normal normal normal 13px/16px 'Open Sans';
@@ -725,6 +732,11 @@
 
   .kpi-trend {
     font-size: 0.625rem;
+  }
+  
+  .legend-item-color {
+    width: 24px;
+    height: 12px;
   }
 
   .sticky-column .th-content {

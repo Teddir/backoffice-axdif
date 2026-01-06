@@ -198,7 +198,7 @@
           <!-- Left Column: Task Completion in All Project -->
           <div class="left-column">
             <!-- Task Completion in All Project Chart -->
-            <div class="chart-card">
+            <div class="chart-card website-view">
               <div class="chart-title-container">
                 <h3 class="chart-title">Task Completion in All Project</h3>
                 <div class="legend-container">
@@ -215,6 +215,116 @@
               <div class="chart-container">
                 <p-chart type="line" [data]="taskCompletionChartData" [options]="taskCompletionChartOptions"></p-chart>
               </div>
+
+              <!-- KPI Cards -->
+              <div class="kpi-cards-1">
+                <div class="kpi-card-1">
+                  <div class="kpi-left-border"></div>
+                  <div class="kpi-content-wrapper-1">
+                    <div class="kpi-header-1">
+                      <div class="kpi-label-1 mobile-first">Total Task Completed</div>
+                      <div class="kpi-icon">
+                        <img src="/dashboard/icon - Info.svg" alt="Info" class="info-icon" />
+                      </div>
+                    </div>
+                    <div class="kpi-value-wrapper">
+                      <div class="kpi-value-container">
+                        <div class="kpi-value-1">{{ taskKpiData.totalTaskCompleted }}</div>
+                        <div class="kpi-trend trend-up">
+                          <span class="trend-value">{{ taskKpiData.totalTaskCompletedTrend }}</span>
+                          <img src="/dashboard/Icon - Increase.svg" alt="Increase" class="trend-arrow" />
+                        </div>
+                      </div>
+                      <div class="kpi-comparison">Last Year : {{ taskKpiData.totalTaskCompletedLastYear }} Task</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="kpi-card-1">
+                  <div class="kpi-left-border"></div>
+                  <div class="kpi-content-wrapper-1">
+                    <div class="kpi-header-1">
+                      <div class="kpi-label-1">Most Completed Tasks At</div>
+                      <div class="kpi-icon">
+                        <img src="/dashboard/icon - Info.svg" alt="Info" class="info-icon" />
+                      </div>
+                    </div>
+                    <div class="kpi-value-wrapper">
+                      <div class="kpi-value-container">
+                        <div class="kpi-value-1">{{ taskKpiData.mostCompletedTasksAt }}</div>
+                      </div>
+                      <div class="kpi-comparison">{{ taskKpiData.mostCompletedTasksAtMonth }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="kpi-card-1">
+                  <div class="kpi-left-border"></div>
+                  <div class="kpi-content-wrapper-1">
+                    <div class="kpi-header-1">
+                      <div class="kpi-label-1 mobile-second">Total Task Created</div>
+                      <div class="kpi-icon">
+                        <img src="/dashboard/icon - Info.svg" alt="Info" class="info-icon" />
+                      </div>
+                    </div>
+                    <div class="kpi-value-wrapper">
+                      <div class="kpi-value-container">
+                        <div class="kpi-value-1">{{ taskKpiData.totalTaskCreated }}</div>
+                        <div class="kpi-trend trend-down">
+                          <span class="trend-value">{{ taskKpiData.totalTaskCreatedTrend }}</span>
+                          <img src="/dashboard/Icon - Decrease.svg" alt="Decrease" class="trend-arrow" />
+                        </div>
+                      </div>
+                      <div class="kpi-comparison">Last Year : {{ taskKpiData.totalTaskCreatedLastYear }} Task</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="kpi-card-1">
+                  <div class="kpi-left-border"></div>
+                  <div class="kpi-content-wrapper-1">
+                    <div class="kpi-header-1">
+                      <div class="kpi-label-1">Most Completed Tasks At</div>
+                      <div class="kpi-icon">
+                        <img src="/dashboard/icon - Info.svg" alt="Info" class="info-icon" />
+                      </div>
+                    </div>
+                    <div class="kpi-value-wrapper">
+                      <div class="kpi-value-container">
+                        <div class="kpi-value-1">{{ taskKpiData.mostCompletedTaskType }}</div>
+                      </div>
+                      <div class="kpi-comparison">{{ taskKpiData.mostCompletedTaskTypeCount }} Task</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-card-other">
+              <div class="chart-title-container">
+                <h3 class="chart-title">Task Completion in All Project</h3>
+                <div class="legend-container">
+                  <div class="legend-item">
+                    <div class="legend-item-color legend-item-color-completed"></div>
+                    <div class="legend-item-label">Completed</div>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-item-color legend-item-color-created"></div>
+                    <div class="legend-item-label">Created Task</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="chart-container">
+                <!-- <p-chart type="bar" [data]="attendanceChartData" [options]="attendanceChartOptions"></p-chart> -->
+                <div class="colSmall w-[25.5px] absolute bg-white z-1">
+                  <p-chart type="line" [data]="taskCompletionChartData1" [options]="taskCompletionChartOptions1"></p-chart>
+                </div>
+                <div class="colLarge max-w-[325px] overflow-x-scroll ml-1.5">
+                  <div class="box" [style.width.px]="chartWidth">
+                    <p-chart type="line" [data]="taskCompletionChartData" [options]="taskCompletionChartOptions2"></p-chart>
+                  </div>
+                </div>
+              </div>
+
+              <!-- KPI -->
 
               <!-- KPI Cards -->
               <div class="kpi-cards-1">

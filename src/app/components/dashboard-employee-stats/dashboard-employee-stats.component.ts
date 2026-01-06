@@ -50,6 +50,11 @@ export class DashboardEmployeeStatsComponent implements OnInit {
   taskCompletionChartData: any;
   taskCompletionChartOptions: any;
 
+  // testing
+  taskCompletionChartData1: any;
+  taskCompletionChartOptions1: any;
+  taskCompletionChartOptions2: any;
+
   // Task Completion KPI Data
   taskKpiData = {
     totalTaskCompleted: 2400,
@@ -201,7 +206,6 @@ export class DashboardEmployeeStatsComponent implements OnInit {
     const documentStyle = getComputedStyle(document.documentElement);
     const textColorSecondary = '#809FB8';
     const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
-    const pixelsPerLabel = 80;
     const barWidth = 80;
 
     // Attendance Summary Chart
@@ -313,7 +317,7 @@ export class DashboardEmployeeStatsComponent implements OnInit {
               weight: 300,
               size: 10,
               family: 'Open Sans',
-            }
+            },
           },
           beginAtZero: true,
           afterFit: (ctx: any) => {
@@ -352,7 +356,6 @@ export class DashboardEmployeeStatsComponent implements OnInit {
             color: surfaceBorder,
             drawTicks: true,
             drawBorder: true,
-            borderColor: '#809FB8',
             borderWidth: 2,
           }
         },
@@ -360,17 +363,9 @@ export class DashboardEmployeeStatsComponent implements OnInit {
           beginAtZero: true,
           ticks: {
             display: false,
-            color: textColorSecondary,
-            font: {
-              weight: 300,
-              size: 10,
-              family: 'Open Sans',
-            }
           },
           grid: {
             color: surfaceBorder,
-            borderColor: '#809FB8',
-            borderWidth: 2,
             drawBorder: false,
             drawTicks: false,
           },
@@ -563,7 +558,111 @@ export class DashboardEmployeeStatsComponent implements OnInit {
         }
       },
     };
+
+    this.taskCompletionChartData1 = {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      datasets: [
+        {
+          label: 'Complete',
+          data: [20, 120, 80, 100, 170, 70, 50, 100, 140, 80, 170, 120],
+        },
+        {
+          label: 'Created Task',
+          data: [10, 60, 100, 80, 120, 100, 150, 70, 110, 140, 50, 100],
+        }
+      ]
+    };
+    // testing
+    this.taskCompletionChartOptions1 = {
+      responsive: false,          // 🔴 REQUIRED
+      maintainAspectRatio: false, // 🔴 REQUIRED
+      aspectRatio: 0.9,
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      layout: {
+        padding: {
+          bottom: 25.5,
+        }
+      },
+      showLine:false,
+      pointBorderWidth:0,
+      pointBackgroundColor: 'transparent',
+      pointBorderColor: 'transparent',
+      scales: {
+        x: {
+          ticks: {
+            display: false,
+          },
+          grid: {
+            drawTicks: false,
+          },
+        },
+        y: {
+          ticks: {
+            color: textColorSecondary,
+            font: {
+              weight: 300,
+              size: 10,
+              family: 'Open Sans',
+            },
+          },
+          beginAtZero: true,
+          afterFit: (ctx: any) => {
+            ctx.width = 25.5;
+          }
+        }
+      }
+    };
+
+    this.taskCompletionChartOptions2 = {
+      responsive: false,          // 🔴 REQUIRED
+      maintainAspectRatio: false, // 🔴 REQUIRED
+      aspectRatio: 0.9,
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      layout: {
+        padding: {
+          top: 9.5,
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: textColorSecondary,
+            font: {
+              weight: 300,
+              size: 10,
+              family: 'Open Sans',
+            }
+          },
+          grid: {
+            color: surfaceBorder,
+            drawTicks: true,
+            drawBorder: true,
+            borderWidth: 2,
+          },
+        },
+        y: {
+          beginAtZero: true,
+          ticks: {
+            display: false,
+          },
+          grid: {
+            color: surfaceBorder,
+            drawBorder: false,
+            drawTicks: false,
+          },
+        },
+      }
+    };
   }
+
 
   toggleDisplayMode(mode: 'monthly' | 'yearly') {
     this.displayMode = mode;
