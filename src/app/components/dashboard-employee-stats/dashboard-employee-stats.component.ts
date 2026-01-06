@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -25,8 +25,8 @@ export class DashboardEmployeeStatsComponent implements OnInit {
   displayMode: 'monthly' | 'yearly' = 'yearly';
   isMobile = false;
   chartWidth: number = 0;
-  sortField: string = '';
-  sortOrder: 'asc' | 'desc' = 'asc';
+  sortField: string | null = null;
+  sortOrder: 'asc' | 'desc' | null = null;
 
   // KPI Data
   kpiData = {
@@ -72,6 +72,7 @@ export class DashboardEmployeeStatsComponent implements OnInit {
   };
 
   // Leave Recap Data
+  private originalLeaveRecapData: any[] = [];
   leaveRecapData: any[] = [
     {
       leaveCode: 'LV-PTES-PT-CV10435-01-23-001',
@@ -185,6 +186,11 @@ export class DashboardEmployeeStatsComponent implements OnInit {
     }
   ];
 
+  // Store original order for reset
+  private initializeOriginalData(): void {
+    this.originalLeaveRecapData = [...this.leaveRecapData];
+  }
+
   // ============================================================================
   // Constructor
   // ============================================================================
@@ -203,9 +209,19 @@ export class DashboardEmployeeStatsComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-    this.isMobile = window.innerWidth <= 768;
+    this.checkMobileView();
     this.user = this.authService.getCurrentUser();
+    this.initializeOriginalData();
     this.initCharts();
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.checkMobileView();
+  }
+
+  private checkMobileView(): void {
+    this.isMobile = window.innerWidth <= 768;
   }
 
   initCharts(): void {
@@ -592,16 +608,10 @@ export class DashboardEmployeeStatsComponent implements OnInit {
 
     this.taskCompletionChartData1 = {
       labels: this.taskCompletionChartData.labels,
-      datasets: [
-        {
-          label: this.taskCompletionChartData.datasets[0].label,
-          data: this.taskCompletionChartData.datasets[0].data,
-        },
-        {
-          label: this.taskCompletionChartData.datasets[1].label,
-          data: this.taskCompletionChartData.datasets[1].data,
-        }
-      ]
+      datasets: this.taskCompletionChartData.datasets.map((dataset: any) => ({
+        label: dataset.label,
+        data: dataset.data,
+      }))
     };
 
     this.taskCompletionChartOptions1 = {
@@ -749,14 +759,20 @@ export class DashboardEmployeeStatsComponent implements OnInit {
   // Table Methods
   // ============================================================================
 
-  sortTable(field: string): void {
-    if (this.sortField === field) {
-      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
-    } else {
-      this.sortField = field;
-      this.sortOrder = 'asc';
+  sortTable(field: string, order: 'asc' | 'desc'): void {
+    // If clicking the same field with the same order, reset to unsorted
+    if (this.sortField === field && this.sortOrder === order) {
+      this.sortField = null;
+      this.sortOrder = null;
+      this.resetTableOrder();
+      return;
     }
 
+    // Set new sort field and order
+    this.sortField = field;
+    this.sortOrder = order;
+
+    // Apply sorting
     this.leaveRecapData.sort((a, b) => {
       let aValue = a[field];
       let bValue = b[field];
@@ -774,13 +790,25 @@ export class DashboardEmployeeStatsComponent implements OnInit {
       }
 
       if (aValue < bValue) {
-        return this.sortOrder === 'asc' ? -1 : 1;
+        return order === 'asc' ? -1 : 1;
       }
       if (aValue > bValue) {
-        return this.sortOrder === 'asc' ? 1 : -1;
+        return order === 'asc' ? 1 : -1;
       }
       return 0;
     });
+  }
+
+  isSortedAsc(field: string): boolean {
+    return this.sortField === field && this.sortOrder === 'asc';
+  }
+
+  isSortedDesc(field: string): boolean {
+    return this.sortField === field && this.sortOrder === 'desc';
+  }
+
+  private resetTableOrder(): void {
+    this.leaveRecapData = [...this.originalLeaveRecapData];
   }
 }
 

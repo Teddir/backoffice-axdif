@@ -414,55 +414,127 @@
           <table class="leave-recap-table">
             <thead>
               <tr>
-                <th class="sticky-column" (click)="sortTable('leaveCode')">
+                <th class="sticky-column">
                   <div class="th-content">
                     <span>Leave Code</span>
-                    <img src="/dashboard/icon - UpDown.svg" alt="Sort" class="sort-icon" />
+                    <div class="sort-icons">
+                      @if (isSortedAsc('leaveCode')) {
+                        <img src="/dashboard/tabel/icon - ArrowUp.svg" alt="Sort Ascending" class="sort-icon" (click)="sortTable('leaveCode', 'asc'); $event.stopPropagation()" />
+                      } @else if (isSortedDesc('leaveCode')) {
+                        <img src="/dashboard/tabel/icon - ArrowDown.svg" alt="Sort Descending" class="sort-icon" (click)="sortTable('leaveCode', 'desc'); $event.stopPropagation()" />
+                      } @else {
+                        <img src="/dashboard/tabel/icon - ChevronUp.svg" alt="Chevron Up" class="sort-icon up-down" (click)="sortTable('leaveCode', 'asc'); $event.stopPropagation()" />
+                        <img src="/dashboard/tabel/icon - ChevronDown.svg" alt="Chevron Down" class="sort-icon up-down" (click)="sortTable('leaveCode', 'desc'); $event.stopPropagation()" />
+                      }
+                    </div>
                   </div>
                 </th>
-                <th (click)="sortTable('requestedOn')">
+                <th>
                   <div class="th-content">
                     <span>Requested On</span>
-                    <img src="/dashboard/icon - UpDown.svg" alt="Sort" class="sort-icon" />
+                    <div class="sort-icons">
+                      @if (isSortedAsc('requestedOn')) {
+                        <img src="/dashboard/tabel/icon - ArrowUp.svg" alt="Sort Ascending" class="sort-icon" (click)="sortTable('requestedOn', 'asc'); $event.stopPropagation()" />
+                      } @else if (isSortedDesc('requestedOn')) {
+                        <img src="/dashboard/tabel/icon - ArrowDown.svg" alt="Sort Descending" class="sort-icon" (click)="sortTable('requestedOn', 'desc'); $event.stopPropagation()" />
+                      } @else {
+                        <img src="/dashboard/tabel/icon - ChevronUp.svg" alt="Chevron Up" class="sort-icon up-down" (click)="sortTable('requestedOn', 'asc'); $event.stopPropagation()" />
+                        <img src="/dashboard/tabel/icon - ChevronDown.svg" alt="Chevron Down" class="sort-icon up-down" (click)="sortTable('requestedOn', 'desc'); $event.stopPropagation()" />
+                      }
+                    </div>
                   </div>
                 </th>
-                <th (click)="sortTable('leaveType')">
+                <th>
                   <div class="th-content">
                     <span>Leave Type</span>
-                    <img src="/dashboard/icon - UpDown.svg" alt="Sort" class="sort-icon" />
+                    <div class="sort-icons">
+                      @if (isSortedAsc('leaveType')) {
+                        <img src="/dashboard/tabel/icon - ArrowUp.svg" alt="Sort Ascending" class="sort-icon" (click)="sortTable('leaveType', 'asc'); $event.stopPropagation()" />
+                      } @else if (isSortedDesc('leaveType')) {
+                        <img src="/dashboard/tabel/icon - ArrowDown.svg" alt="Sort Descending" class="sort-icon" (click)="sortTable('leaveType', 'desc'); $event.stopPropagation()" />
+                      } @else {
+                        <img src="/dashboard/tabel/icon - ChevronUp.svg" alt="Chevron Up" class="sort-icon up-down" (click)="sortTable('leaveType', 'asc'); $event.stopPropagation()" />
+                        <img src="/dashboard/tabel/icon - ChevronDown.svg" alt="Chevron Down" class="sort-icon up-down" (click)="sortTable('leaveType', 'desc'); $event.stopPropagation()" />
+                      }
+                    </div>
                   </div>
                 </th>
-                <th (click)="sortTable('startDate')">
+                <th>
                   <div class="th-content">
                     <span>Start Date</span>
-                    <img src="/dashboard/icon - UpDown.svg" alt="Sort" class="sort-icon" />
+                    <div class="sort-icons">
+                      @if (isSortedAsc('startDate')) {
+                        <img src="/dashboard/tabel/icon - ArrowUp.svg" alt="Sort Ascending" class="sort-icon" (click)="sortTable('startDate', 'asc'); $event.stopPropagation()" />
+                      } @else if (isSortedDesc('startDate')) {
+                        <img src="/dashboard/tabel/icon - ArrowDown.svg" alt="Sort Descending" class="sort-icon" (click)="sortTable('startDate', 'desc'); $event.stopPropagation()" />
+                      } @else {
+                        <img src="/dashboard/tabel/icon - ChevronUp.svg" alt="Chevron Up" class="sort-icon up-down" (click)="sortTable('startDate', 'asc'); $event.stopPropagation()" />
+                        <img src="/dashboard/tabel/icon - ChevronDown.svg" alt="Chevron Down" class="sort-icon up-down" (click)="sortTable('startDate', 'desc'); $event.stopPropagation()" />
+                      }
+                    </div>
                   </div>
                 </th>
-                <th (click)="sortTable('endDate')">
+                <th>
                   <div class="th-content">
                     <span>End Date</span>
-                    <img src="/dashboard/icon - UpDown.svg" alt="Sort" class="sort-icon" />
+                    <div class="sort-icons">
+                      @if (isSortedAsc('endDate')) {
+                        <img src="/dashboard/tabel/icon - ArrowUp.svg" alt="Sort Ascending" class="sort-icon" (click)="sortTable('endDate', 'asc'); $event.stopPropagation()" />
+                      } @else if (isSortedDesc('endDate')) {
+                        <img src="/dashboard/tabel/icon - ArrowDown.svg" alt="Sort Descending" class="sort-icon" (click)="sortTable('endDate', 'desc'); $event.stopPropagation()" />
+                      } @else {
+                        <img src="/dashboard/tabel/icon - ChevronUp.svg" alt="Chevron Up" class="sort-icon up-down" (click)="sortTable('endDate', 'asc'); $event.stopPropagation()" />
+                        <img src="/dashboard/tabel/icon - ChevronDown.svg" alt="Chevron Down" class="sort-icon up-down" (click)="sortTable('endDate', 'desc'); $event.stopPropagation()" />
+                      }
+                    </div>
                   </div>
                 </th>
-                <th (click)="sortTable('duration')">
+                <th>
                   <div class="th-content">
                     <span>Duration</span>
-                    <img src="/dashboard/icon - UpDown.svg" alt="Sort" class="sort-icon" />
+                    <div class="sort-icons">
+                      @if (isSortedAsc('duration')) {
+                        <img src="/dashboard/tabel/icon - ArrowUp.svg" alt="Sort Ascending" class="sort-icon" (click)="sortTable('duration', 'asc'); $event.stopPropagation()" />
+                      } @else if (isSortedDesc('duration')) {
+                        <img src="/dashboard/tabel/icon - ArrowDown.svg" alt="Sort Descending" class="sort-icon" (click)="sortTable('duration', 'desc'); $event.stopPropagation()" />
+                      } @else {
+                        <img src="/dashboard/tabel/icon - ChevronUp.svg" alt="Chevron Up" class="sort-icon up-down" (click)="sortTable('duration', 'asc'); $event.stopPropagation()" />
+                        <img src="/dashboard/tabel/icon - ChevronDown.svg" alt="Chevron Down" class="sort-icon up-down" (click)="sortTable('duration', 'desc'); $event.stopPropagation()" />
+                      }
+                    </div>
                   </div>
                 </th>
-                <th (click)="sortTable('day')">
+                <th>
                   <div class="th-content">
                     <span>Day</span>
-                    <img src="/dashboard/icon - UpDown.svg" alt="Sort" class="sort-icon" />
+                    <div class="sort-icons">
+                      @if (isSortedAsc('day')) {
+                        <img src="/dashboard/tabel/icon - ArrowUp.svg" alt="Sort Ascending" class="sort-icon" (click)="sortTable('day', 'asc'); $event.stopPropagation()" />
+                      } @else if (isSortedDesc('day')) {
+                        <img src="/dashboard/tabel/icon - ArrowDown.svg" alt="Sort Descending" class="sort-icon" (click)="sortTable('day', 'desc'); $event.stopPropagation()" />
+                      } @else {
+                        <img src="/dashboard/tabel/icon - ChevronUp.svg" alt="Chevron Up" class="sort-icon up-down" (click)="sortTable('day', 'asc'); $event.stopPropagation()" />
+                        <img src="/dashboard/tabel/icon - ChevronDown.svg" alt="Chevron Down" class="sort-icon up-down" (click)="sortTable('day', 'desc'); $event.stopPropagation()" />
+                      }
+                    </div>
                   </div>
                 </th>
-                <th (click)="sortTable('status')">
+                <th>
                   <div class="th-content">
                     <span>Status</span>
-                    <img src="/dashboard/icon - UpDown.svg" alt="Sort" class="sort-icon" />
+                    <div class="sort-icons">
+                      @if (isSortedAsc('status')) {
+                        <img src="/dashboard/tabel/icon - ArrowUp.svg" alt="Sort Ascending" class="sort-icon" (click)="sortTable('status', 'asc'); $event.stopPropagation()" />
+                      } @else if (isSortedDesc('status')) {
+                        <img src="/dashboard/tabel/icon - ArrowDown.svg" alt="Sort Descending" class="sort-icon" (click)="sortTable('status', 'desc'); $event.stopPropagation()" />
+                      } @else {
+                        <img src="/dashboard/tabel/icon - ChevronUp.svg" alt="Chevron Up" class="sort-icon up-down" (click)="sortTable('status', 'asc'); $event.stopPropagation()" />
+                        <img src="/dashboard/tabel/icon - ChevronDown.svg" alt="Chevron Down" class="sort-icon up-down" (click)="sortTable('status', 'desc'); $event.stopPropagation()" />
+                      }
+                    </div>
                   </div>
                 </th>
-                <th (click)="sortTable('reason')">
+                <th>
                   <div class="th-content">
                     <span>Reason</span>
                   </div>

@@ -1,7 +1,6 @@
 .dashboard-container {
   min-height: 100vh;
   background: #f7fafc;
-  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 .dashboard-content {
@@ -503,11 +502,7 @@
   }
 
   .kpi-value {
-    text-align: left;
     font: normal normal bold 16px/20px 'Open Sans';
-    letter-spacing: 0px;
-    color: #212121;
-    opacity: 1;
   }
 
   .kpi-content-wrapper {
@@ -566,7 +561,6 @@
 .leave-recap-table {
   width: 100%;
   border-collapse: collapse;
-  font-family: 'Open Sans', sans-serif;
 }
 
 .leave-recap-table thead {
@@ -629,6 +623,26 @@
   min-width: 160px;
 }
 
+.sort-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sort-icons .sort-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.sort-icons .sort-icon.up-down {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  display: block;
+}
+
 .th-content span {
   text-align: left;
   font: normal normal bold 13px/13px 'Open Sans';
@@ -641,6 +655,7 @@
   width: 18px;
   height: 18px;
   flex-shrink: 0;
+  display: block;
 }
 
 .chart-card-other {
@@ -650,6 +665,8 @@
 @media (max-width: 425px) {
   .stats-header {
     margin-bottom: 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .chart-card.website-view {
@@ -667,11 +684,6 @@
 
   .chart-card-other .legend-container {
     padding: 0rem 0px 0rem 1rem;
-  }
-
-  .stats-header {
-    flex-direction: column;
-    align-items: flex-start;
   }
 
   .header-controls {
@@ -740,7 +752,6 @@
   }
 
   .kpi-value {
-    text-align: left;
     font: normal normal bold 15px/18px 'Open Sans';
   }
 
@@ -753,7 +764,7 @@
   }
 
   .kpi-label-1.mobile-first {
-    width: min-content
+    width: min-content;
   }
 
   .kpi-label-1.mobile-second {
@@ -761,7 +772,7 @@
   }
 
   .kpi-value-1 {
-    font: normal normal bold 16px/20px Open Sans;
+    font: normal normal bold 16px/20px 'Open Sans';
   }
 
   .kpi-comparison {

@@ -69,7 +69,13 @@ export class LoginComponent implements OnInit {
       if (this.authService.login(email, password)) {
         this.router.navigate(['/dashboard/overview']);
       } else {
-        alert('Invalid email or password, please try again / or register your account first');
+        if (
+          confirm(
+            "Invalid email or password.\n\nClick OK to register a new account, or Cancel to try again."
+          )
+        ) {
+          window.location.href = "/registration";
+        }
       }
     }
   }
