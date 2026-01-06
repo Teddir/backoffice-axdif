@@ -190,6 +190,10 @@ export class DashboardNavbarComponent implements OnInit, OnDestroy {
     return currentLink ? currentLink.label : 'Overview';
   }
 
+  isAnyDashboardRoute(): boolean {
+    return this.activeRoute.startsWith('/dashboard/');
+  }
+
   // ============================================================================
   // Navigation Methods
   // ============================================================================

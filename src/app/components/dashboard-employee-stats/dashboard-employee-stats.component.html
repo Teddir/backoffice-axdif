@@ -27,7 +27,7 @@
             <div class="period-input-wrapper">
               <p-datepicker [(ngModel)]="selectedPeriod" [view]="datePickerView" [dateFormat]="getDatePickerFormat()"
                 inputId="period-calendar" [showIcon]="true" size="small" [iconDisplay]="'input'"
-                inputStyleClass="period-input" panelStyleClass="period-calendar-panel"
+                inputStyleClass="period-input" panelStyleClass="period-calendar-panel" appendTo="body"
                 (onSelect)="onPeriodChange($event)">
                 <ng-template #inputicon let-clickCallBack="clickCallBack">
                   <img src="/dashboard/icon - Callendar.svg" alt="Calendar" class="calendar-icon-template"
@@ -316,7 +316,7 @@
                   <p-chart type="line" [data]="taskCompletionChartData1" [options]="taskCompletionChartOptions1"></p-chart>
                 </div>
                 <div class="chart-scrollable-area chart-scrollable-line">
-                  <div class="chart-scrollable-content abso" [style.width.px]="chartWidth">
+                  <div class="chart-scrollable-content chart-scrollable-content-offset" [style.width.px]="chartWidth">
                     <p-chart type="line" [data]="taskCompletionChartData" [options]="taskCompletionChartOptions2"></p-chart>
                   </div>
                 </div>
@@ -465,7 +465,6 @@
                 <th (click)="sortTable('reason')">
                   <div class="th-content">
                     <span>Reason</span>
-                    <!-- <img src="/dashboard/icon - UpDown.svg" alt="Sort" class="sort-icon" /> -->
                   </div>
                 </th>
               </tr>

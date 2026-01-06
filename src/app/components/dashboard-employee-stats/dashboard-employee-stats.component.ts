@@ -16,20 +16,25 @@ import { BadgeModule } from "primeng/badge";
   styleUrl: './dashboard-employee-stats.component.css'
 })
 export class DashboardEmployeeStatsComponent implements OnInit {
+  // ============================================================================
+  // Properties
+  // ============================================================================
 
   user: any = null;
-  selectedPeriod: Date = new Date(2022, 0, 1); // January 2022
+  selectedPeriod: Date = new Date(2022, 0, 1);
   displayMode: 'monthly' | 'yearly' = 'yearly';
+  isMobile = false;
+  chartWidth: number = 0;
+  sortField: string = '';
+  sortOrder: 'asc' | 'desc' = 'asc';
 
+  // KPI Data
   kpiData = {
     totalWorkingDays: 237,
     actualWorkingHours: '2126 hr 14 min',
     totalWorkingHours: '2930 hr 26 min',
     totalLateComing: 0
   };
-
-  isMobile = false;
-  chartWidth: number = 0;
 
   // Attendance Summary Chart Data
   attendanceChartData: any;
@@ -48,9 +53,9 @@ export class DashboardEmployeeStatsComponent implements OnInit {
   // Task Completion Chart Data
   taskCompletionChartData: any;
   taskCompletionChartOptions: any;
-  taskCompletionChartData1: any; // Mobile: Y-axis only
-  taskCompletionChartOptions1: any; // Mobile: Y-axis only
-  taskCompletionChartOptions2: any; // Mobile: Chart data only
+  taskCompletionChartData1: any;
+  taskCompletionChartOptions1: any;
+  taskCompletionChartOptions2: any;
 
   // Task Completion KPI Data
   taskKpiData = {
@@ -180,16 +185,20 @@ export class DashboardEmployeeStatsComponent implements OnInit {
     }
   ];
 
-  sortField: string = '';
-  sortOrder: 'asc' | 'desc' = 'asc';
+  // ============================================================================
+  // Constructor
+  // ============================================================================
 
   constructor(
     private authService: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
-  ngOnInit() {
+  // ============================================================================
+  // Lifecycle Hooks
+  // ============================================================================
 
+  ngOnInit(): void {
     if (!this.authService.isLoggedIn()) {
       this.router.navigate(['/login']);
       return;
@@ -199,13 +208,24 @@ export class DashboardEmployeeStatsComponent implements OnInit {
     this.initCharts();
   }
 
-  initCharts() {
+  initCharts(): void {
     const documentStyle = getComputedStyle(document.documentElement);
     const textColorSecondary = '#809FB8';
     const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
     const barWidth = 80;
 
-    // Attendance Summary Chart
+    this.initAttendanceChart(textColorSecondary, surfaceBorder, barWidth);
+    this.initCompletenessChart(textColorSecondary, surfaceBorder);
+    this.initProgressChart(textColorSecondary, surfaceBorder);
+    this.initTaskCompletionChart(textColorSecondary, surfaceBorder);
+  }
+
+  // ============================================================================
+  // Chart Initialization Methods
+  // ============================================================================
+
+  private initAttendanceChart(textColorSecondary: string, surfaceBorder: string, barWidth: number): void {
+
     this.attendanceChartData = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
       datasets: [
@@ -228,14 +248,7 @@ export class DashboardEmployeeStatsComponent implements OnInit {
       ]
     };
 
-    // Calculate chart width for horizontal scrolling
-    const labelsCount = this.attendanceChartData.labels.length;
-    this.chartWidth = labelsCount * barWidth;
-
-    const barLength = this.attendanceChartData.datasets[0].data.length;
-    if (barLength > 7) {
-      this.chartWidth = 1000 + ((barLength - 7) * 10);
-    }
+    this.calculateChartWidth(barWidth);
 
     this.attendanceChartOptions = {
       maintainAspectRatio: false,
@@ -285,7 +298,6 @@ export class DashboardEmployeeStatsComponent implements OnInit {
       }
     };
 
-    // Mobile: Y-axis only chart
     this.attendanceChartOptions1 = {
       responsive: false,
       maintainAspectRatio: false,
@@ -334,7 +346,6 @@ export class DashboardEmployeeStatsComponent implements OnInit {
       }
     };
 
-    // Mobile: Chart data only (no Y-axis)
     this.attendanceChartOptions2 = {
       responsive: false,
       maintainAspectRatio: false,
@@ -344,7 +355,6 @@ export class DashboardEmployeeStatsComponent implements OnInit {
           display: false
         }
       },
-
       layout: {
         padding: {
           top: 9.5,
@@ -386,8 +396,9 @@ export class DashboardEmployeeStatsComponent implements OnInit {
         }
       }
     };
+  }
 
-    // Attendance Completeness Chart
+  private initCompletenessChart(textColorSecondary: string, surfaceBorder: string): void {
     this.completenessChartData = {
       labels: ['Not Complete', 'Complete'],
       datasets: [{
@@ -408,9 +419,6 @@ export class DashboardEmployeeStatsComponent implements OnInit {
             font: {
               size: 12, weight: 300, family: 'Open Sans', textDecoration: 'none'
             },
-            // sort: (a: any, b: any) => {
-            //   return b.index - a.index;
-            // },
             generateLabels: (chart: any) => {
               const total = chart.data.labels.length;
               const labels = chart.data.labels.slice().reverse();
@@ -431,7 +439,6 @@ export class DashboardEmployeeStatsComponent implements OnInit {
             },
             onClick: (e: any, legendItem: any, legend: any) => {
               const chart = legend.chart;
-              // toggle visibility slice
               chart.toggleDataVisibility(legendItem.index);
               chart.update();
             }
@@ -442,8 +449,9 @@ export class DashboardEmployeeStatsComponent implements OnInit {
         }
       },
     };
+  }
 
-    // Overall Task Progress Chart
+  private initProgressChart(textColorSecondary: string, surfaceBorder: string): void {
     this.progressChartData = {
       labels: ['Unscheduled', 'Overdue', 'Complete'],
       datasets: [{
@@ -496,8 +504,9 @@ export class DashboardEmployeeStatsComponent implements OnInit {
         }
       },
     };
+  }
 
-    // Task Completion Chart
+  private initTaskCompletionChart(textColorSecondary: string, surfaceBorder: string): void {
     this.taskCompletionChartData = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
       datasets: [
@@ -572,7 +581,7 @@ export class DashboardEmployeeStatsComponent implements OnInit {
               size: 10,
               family: 'Open Sans',
             },
-            callback: (value: any) => value
+            callback: (value: any) => value.toString()
           },
           grid: {
             color: surfaceBorder
@@ -594,7 +603,7 @@ export class DashboardEmployeeStatsComponent implements OnInit {
         }
       ]
     };
-    // Mobile: Y-axis only chart
+
     this.taskCompletionChartOptions1 = {
       responsive: false,
       maintainAspectRatio: false,
@@ -647,7 +656,6 @@ export class DashboardEmployeeStatsComponent implements OnInit {
       }
     };
 
-    // Mobile: Chart data only (no Y-axis)
     this.taskCompletionChartOptions2 = {
       responsive: false,
       maintainAspectRatio: false,
@@ -701,7 +709,25 @@ export class DashboardEmployeeStatsComponent implements OnInit {
   }
 
 
-  toggleDisplayMode(mode: 'monthly' | 'yearly') {
+  // ============================================================================
+  // Helper Methods
+  // ============================================================================
+
+  private calculateChartWidth(barWidth: number): void {
+    const labelsCount = this.attendanceChartData.labels.length;
+    this.chartWidth = labelsCount * barWidth;
+
+    const barLength = this.attendanceChartData.datasets[0].data.length;
+    if (barLength > 7) {
+      this.chartWidth = 1000 + ((barLength - 7) * 10);
+    }
+  }
+
+  // ============================================================================
+  // Event Handlers
+  // ============================================================================
+
+  toggleDisplayMode(mode: 'monthly' | 'yearly'): void {
     this.displayMode = mode;
   }
 
@@ -718,6 +744,10 @@ export class DashboardEmployeeStatsComponent implements OnInit {
   getDatePickerFormat(): string {
     return this.displayMode === 'yearly' ? 'yy' : 'MM yy';
   }
+
+  // ============================================================================
+  // Table Methods
+  // ============================================================================
 
   sortTable(field: string): void {
     if (this.sortField === field) {

@@ -58,7 +58,7 @@
     <div class="nav-dropdown-wrapper">
       <a 
         class="nav-link" 
-        [class.active]="isActive('/dashboard/overview') || showNavDropdown" 
+        [class.active]="isAnyDashboardRoute() || showNavDropdown" 
         (click)="toggleNavDropdown()">
         {{ getCurrentPageLabel() }} 
         <img src="/dashboard/icon - ChevronDown.svg" alt="Chevron Down" class="chevron-icon-down" />
@@ -66,14 +66,7 @@
       @if (showNavDropdown) {
         <div class="nav-dropdown" (click)="$event.stopPropagation()">
           @for (navLink of navLinks; track navLink.route) {
-            @if (navLink.route === '/dashboard/overview') {
-              <div 
-                class="nav-dropdown-item" 
-                [class.active]="isActive(navLink.route)"
-                (click)="navigateToRoute(navLink.route)">
-                {{ navLink.label }}
-              </div>
-            } @else if (navLink.isDropdown) {
+            @if (navLink.isDropdown) {
               <div class="nav-dropdown-item dropdown" (click)="navigateToRoute(navLink.route)">
                 <p>{{ navLink.label }}</p>
                 <img src="/dashboard/icon - ChevronDownSolid.svg" alt="Chevron Down Solid" class="chevron-icon-down" />

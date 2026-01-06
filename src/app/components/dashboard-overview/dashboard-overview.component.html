@@ -23,6 +23,7 @@
                 [iconDisplay]="'input'"
                 inputStyleClass="period-input"
                 panelStyleClass="period-calendar-panel"
+                appendTo="body"
                 (onSelect)="onPeriodChange($event)">
                 <ng-template #inputicon let-clickCallBack="clickCallBack">
                   <img src="/dashboard/icon - Callendar.svg" alt="Callendar" class="callendar-icon-template" (click)="clickCallBack($event)" />

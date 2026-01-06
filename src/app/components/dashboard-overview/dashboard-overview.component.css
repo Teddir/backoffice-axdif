@@ -114,6 +114,7 @@
   border-radius: 8px !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   background: white !important;
+  width: 300px !important; /* aman untuk datepicker */
 }
 
 ::ng-deep .period-calendar-panel .p-datepicker-header {
