@@ -7,8 +7,6 @@ import { definePreset } from '@primeuix/themes';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
-// Create custom preset extending Aura with custom primary color #EC4B5A
-// Using a color palette based on #EC4B5A (coral red)
 const CustomAura = definePreset(Aura, {
   semantic: {
     primary: {
@@ -17,7 +15,7 @@ const CustomAura = definePreset(Aura, {
       200: '#fecaca',
       300: '#fca5a5',
       400: '#f87171',
-      500: '#EC4B5A', // Main primary color
+      500: '#EC4B5A',
       600: '#d43e4d',
       700: '#b91c1c',
       800: '#991b1b',
@@ -30,12 +28,13 @@ const CustomAura = definePreset(Aura, {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes), provideClientHydration(withEventReplay()),
+    provideRouter(routes),
+    provideClientHydration(withEventReplay()),
     providePrimeNG({
-        theme: {
-            preset: CustomAura
-        },
-        ripple: true
+      theme: {
+        preset: CustomAura
+      },
+      ripple: true
     })
   ]
 };

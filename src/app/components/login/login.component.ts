@@ -81,9 +81,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSocialLogin(provider: string): void {
-    console.log(`Login with ${provider}`);
-    // In a real app, this would handle OAuth
-    // For UI only, we'll just show a message
     alert(`Social login with ${provider} is not implemented (UI only)`);
   }
 

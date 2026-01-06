@@ -214,7 +214,6 @@ export class DashboardNavbarComponent implements OnInit, OnDestroy {
   navigateToProfile(): void {
     this.showProfileDropdown = false;
     // TODO: Navigate to profile page when implemented
-    console.log('Navigate to profile');
   }
 
   navigateToSubmission(optionId: string): void {
@@ -273,7 +272,6 @@ export class DashboardNavbarComponent implements OnInit, OnDestroy {
 
   toggleDarkMode(): void {
     // TODO: Implement dark mode toggle logic
-    console.log('Dark mode:', this.darkMode);
   }
 
   logout(): void {
